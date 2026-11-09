@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Stackly Fitness Club Management</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div>
+        <div class="dashboard-logo-area">
+          <a href="index.html" class="site-logo">
+            <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 36px;">
+          </a>
+          <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; letter-spacing: 0.1em; margin-top: 8px;">
+            HQ MANAGEMENT PORTAL
+          </div>
+        </div>
+
+        <nav class="dashboard-menu">
+          <a href="#overview-section" class="dash-menu-item active" data-tab="overview-section">
+            <i class="fa-solid fa-chart-pie"></i> Overview
+          </a>
+          <a href="#members-section" class="dash-menu-item" data-tab="members-section">
+            <i class="fa-solid fa-users"></i> Members
+          </a>
+          <a href="#schedules-section" class="dash-menu-item" data-tab="schedules-section">
+            <i class="fa-solid fa-calendar-days"></i> Schedules
+          </a>
+          <a href="#trainers-section" class="dash-menu-item" data-tab="trainers-section">
+            <i class="fa-solid fa-dumbbell"></i> Trainers
+          </a>
+          <a href="#blog-section" class="dash-menu-item" data-tab="blog-section">
+            <i class="fa-solid fa-newspaper"></i> Blog Articles
+          </a>
+          <a href="#orders-section" class="dash-menu-item" data-tab="orders-section">
+            <i class="fa-solid fa-cart-shopping"></i> Store Orders
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <div style="padding-top: 20px; border-top: 1px solid var(--color-dark-border);">
+          <a href="login.html" class="dash-menu-item" style="color: var(--color-danger);">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Topbar -->
+      <div class="dashboard-topbar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <button id="sidebar-toggle-btn" class="btn btn-outline btn-sm" style="padding: 8px 12px;" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div>
+            <h2 style="font-size: 1.45rem; color: #fff; margin-bottom: 2px; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.02em;">STACKLY CLUB HQ MANAGEMENT</h2>
+            <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 6px;">
+              <i class="fa-solid fa-shield-halved"></i> Administrative Control Portal
+            </span>
+          </div>
+        </div>
+
+        <div class="dash-user-area">
+          <a href="404.html" id="btn-add-member-modal" class="btn btn-primary btn-sm" style="text-decoration: none;">
+            <i class="fa-solid fa-plus"></i> Add Member
+          </a>
+
+          <div id="admin-bell-btn" style="position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); cursor: pointer;" title="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background-color: var(--color-primary); border-radius: 50%;"></span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="images/avatar-2.webp" alt="Admin Avatar" class="dash-avatar">
+            <div style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+              <div id="admin-profile-name" style="font-weight: 700; color: #fff; font-size: 0.9rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Marcus Vance</div>
+              <div id="admin-profile-email" style="font-size: 0.75rem; color: var(--color-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">admin@stacklyfitness.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Content Area -->
+      <div class="dashboard-content">
+
+        <!-- ================= 1. OVERVIEW SECTION ================= -->
+        <section id="overview-section" class="dash-tab-content active">
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">ADMINISTRATIVE OVERVIEW &amp; CLUB METRICS</h2>
+              <p class="dash-section-subtitle">Real-time facility utilization, revenue trajectory, member check-ins, and floor operations</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="badge badge-lime"><i class="fa-solid fa-circle-dot fa-fade"></i> LIVE FLOOR ACTIVE</span>
+              <span style="font-size: 0.85rem; color: var(--color-text-light);"><i class="fa-regular fa-clock"></i> Updated just now</span>
+            </div>
+          </div>
+
+          <!-- Metrics Row -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Active Members</span>
+                <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+              </div>
+              <div class="metric-value" id="admin-active-members-count">3,428</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +12.4% vs last month</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Monthly Revenue</span>
+                <div class="metric-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+              </div>
+              <div class="metric-value">$84,920</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +8.6% recurring MRR</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Today's Check-Ins</span>
+                <div class="metric-icon"><i class="fa-solid fa-fingerprint"></i></div>
+              </div>
+              <div class="metric-value">612</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> Peak hours: 17:00 - 20:00</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Coaching Sessions</span>
+                <div class="metric-icon"><i class="fa-solid fa-dumbbell"></i></div>
+              </div>
+              <div class="metric-value">48</div>
+              <div class="metric-change" style="color: var(--color-primary);"><i class="fa-solid fa-circle-check"></i> 100% capacity today</div>
+            </div>
+          </div>
+
+          <!-- SVG Analytics Chart -->
+          <div class="chart-box">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">MEMBERSHIP GROWTH &amp; ATTENDANCE VELOCITY</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Monthly check-in volume (grey) vs new member subscriptions (lime)</p>
+              </div>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; align-items: center;">
+                <span><span style="display:inline-block; width: 12px; height: 12px; background-color: var(--color-primary); margin-right: 6px;"></span> New Members</span>
+                <span><span style="display:inline-block; width: 12px; height: 12px; background-color: #333838; margin-right: 6px;"></span> Total Check-Ins</span>
+              </div>
+            </div>
+            <div id="admin-analytics-chart" class="svg-chart-wrap">
+              <!-- Injected by js/dashboard.js -->
+            </div>
+          </div>
+
+          <!-- Overview 2-Column Summary Cards -->
+          <div class="dash-two-col">
+            <!-- Facility Live Status -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">FACILITY &amp; FLOOR CAPACITY</h3>
+                <span class="badge badge-lime">84% Live Capacity</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong>Studio A - Functional Turf (HIIT)</strong>
+                    <span class="text-lime" style="font-weight: 700;">18 / 20 Athletes (90%)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 90%; height: 100%; background-color: var(--color-primary);"></div>
+                  </div>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong>Studio B - Olympic Rig &amp; Platforms</strong>
+                    <span class="text-lime" style="font-weight: 700;">12 / 12 Athletes (100% Full)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background-color: var(--color-primary);"></div>
+                  </div>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong>Studio C - Combat &amp; Athletic Mobility</strong>
+                    <span style="color: var(--color-text-light); font-weight: 700;">10 / 14 Athletes (71%)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 71%; height: 100%; background-color: #4a5252;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operations Dispatch & Activity Log -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">RECENT ACTIVITY &amp; ALERTS</h3>
+                <span class="badge badge-dark">Live Dispatch</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(186, 238, 38, 0.15); color: var(--color-primary); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-user-plus"></i></div>
+                  <div style="flex: 1;">
+                    <div style="font-size: 0.9rem; color: #fff;"><strong>Alex Mercer</strong> renewed <span class="text-lime">Pro Athlete</span> tier</div>
+                    <div style="font-size: 0.75rem; color: var(--color-text-light);">12 minutes ago • Automated Billing</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(0, 208, 132, 0.15); color: var(--color-success); display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-cart-shopping"></i></div>
+                  <div style="flex: 1;">
+                    <div style="font-size: 0.9rem; color: #fff;">Order <strong>#STK-8491</strong> paid ($104.99) - Ready for Floor Pickup</div>
+                    <div style="font-size: 0.75rem; color: var(--color-text-light);">34 minutes ago • Pro Shop Desk</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background-color: rgba(250, 173, 20, 0.15); color: #faad14; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-star"></i></div>
+                  <div style="flex: 1;">
+                    <div style="font-size: 0.9rem; color: #fff;">Coach <strong>Rory Webster</strong> received 5-star rating from David S.</div>
+                    <div style="font-size: 0.75rem; color: var(--color-text-light);">1 hour ago • Athlete Feedback</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 2. MEMBERS SECTION ================= -->
+        <section id="members-section" class="dash-tab-content">
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">ATHLETE &amp; MEMBER ROSTER</h2>
+              <p class="dash-section-subtitle">Manage memberships, plan tiers, personal trainer assignments, and registration status</p>
+            </div>
+            <a href="404.html" class="btn btn-primary btn-sm btn-trigger-add-member" style="text-decoration: none;">
+              <i class="fa-solid fa-plus"></i> Register New Member
+            </a>
+          </div>
+
+          <!-- Members Quick Stats -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Total Members</span>
+                <div class="metric-icon"><i class="fa-solid fa-address-book"></i></div>
+              </div>
+              <div class="metric-value">3,428</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +46 this week</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Active Subscriptions</span>
+                <div class="metric-icon"><i class="fa-solid fa-id-card"></i></div>
+              </div>
+              <div class="metric-value">3,110</div>
+              <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> 90.7% retention</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Pending Induction</span>
+                <div class="metric-icon"><i class="fa-solid fa-clock"></i></div>
+              </div>
+              <div class="metric-value">184</div>
+              <div class="metric-change" style="color: #faad14;"><i class="fa-solid fa-bell"></i> Scan required</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Grace Period / Expired</span>
+                <div class="metric-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              </div>
+              <div class="metric-value">134</div>
+              <div class="metric-change down"><i class="fa-solid fa-arrow-trend-down"></i> -3.8% churn</div>
+            </div>
+          </div>
+
+          <!-- Members Table Card -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">REGISTERED ATHLETES DIRECTORY</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Search, filter, edit, or remove member accounts</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="shop-pill dash-filter-btn active" data-filter-group="members" data-status="all" style="font-size: 0.85rem; padding: 6px 14px;">All</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="members" data-status="active" style="font-size: 0.85rem; padding: 6px 14px;">Active</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="members" data-status="pending" style="font-size: 0.85rem; padding: 6px 14px;">Pending</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="members" data-status="expired" style="font-size: 0.85rem; padding: 6px 14px;">Expired</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table class="dash-table" id="members-table">
+                <thead>
+                  <tr>
+                    <th>Member Name</th>
+                    <th>Email</th>
+                    <th>Tier Plan</th>
+                    <th>Trainer Assigned</th>
+                    <th>Joined Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="members-table-body">
+                  <tr class="member-data-row" data-status="active">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="images/avatar-1.webp" alt="Alex Mercer" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                        <strong>Alex Mercer</strong>
+                      </div>
+                    </td>
+                    <td>alex.athlete@stackly.com</td>
+                    <td><span class="badge badge-lime">Pro Athlete</span></td>
+                    <td>Rory Webster</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 12, 2026</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="active">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="images/avatar-2.webp" alt="Sarah Jenkins" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                        <strong>Sarah Jenkins</strong>
+                      </div>
+                    </td>
+                    <td>sarah.j@example.com</td>
+                    <td><span class="badge badge-dark">Starter Tier</span></td>
+                    <td>Unassigned</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 20, 2026</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="pending">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #2a2e2e; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff;">DS</div>
+                        <strong>David Sterling</strong>
+                      </div>
+                    </td>
+                    <td>david.s@example.com</td>
+                    <td><span class="badge badge-lime">Elite VIP</span></td>
+                    <td>Madelyn Donin</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 01, 2026</td>
+                    <td><span class="status-badge status-pending">Pending Scan</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="expired">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #2a2e2e; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff;">JR</div>
+                        <strong>Jessica Ryan</strong>
+                      </div>
+                    </td>
+                    <td>jessica.r@example.com</td>
+                    <td><span class="badge badge-dark">Pro Athlete</span></td>
+                    <td>Adam Walker</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Sep 15, 2026</td>
+                    <td><span class="status-badge status-expired">Expired</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="active">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #2a2e2e; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff;">BO</div>
+                        <strong>Brian O'Connor</strong>
+                      </div>
+                    </td>
+                    <td>brian.o@example.com</td>
+                    <td><span class="badge badge-lime">Elite VIP</span></td>
+                    <td>Elena Rostova</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 28, 2026</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="active">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #2a2e2e; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff;">MV</div>
+                        <strong>Marcus Vance Jr.</strong>
+                      </div>
+                    </td>
+                    <td>marcus.v@example.com</td>
+                    <td><span class="badge badge-lime">Pro Athlete</span></td>
+                    <td>Rory Webster</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 02, 2026</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="member-data-row" data-status="active">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: #2a2e2e; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff;">CZ</div>
+                        <strong>Chloe Zhao</strong>
+                      </div>
+                    </td>
+                    <td>chloe.z@example.com</td>
+                    <td><span class="badge badge-dark">Starter Tier</span></td>
+                    <td>Adam Walker</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 04, 2026</td>
+                    <td><span class="status-badge status-active">Active</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete record"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 3. SCHEDULES SECTION ================= -->
+        <section id="schedules-section" class="dash-tab-content">
+          <span id="schedule-section" style="position: absolute; top: -80px; visibility: hidden;"></span>
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">MASTER CLASS &amp; TRAINING SCHEDULE</h2>
+              <p class="dash-section-subtitle">Real-time floor scheduling, studio zoning, coach allocation, and athlete booking rosters</p>
+            </div>
+            <a href="404.html" class="btn btn-primary btn-sm" style="text-decoration: none;">
+              <i class="fa-solid fa-calendar-plus"></i> Schedule New Class
+            </a>
+          </div>
+
+          <!-- Schedules Quick Metrics -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Classes Today</span>
+                <div class="metric-icon"><i class="fa-solid fa-calendar-days"></i></div>
+              </div>
+              <div class="metric-value">18</div>
+              <div class="metric-change up"><i class="fa-solid fa-bolt"></i> 100% on schedule</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Athlete Bookings</span>
+                <div class="metric-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+              </div>
+              <div class="metric-value">246</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +18 vs yesterday</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Floor Fill Rate</span>
+                <div class="metric-icon"><i class="fa-solid fa-chart-pie"></i></div>
+              </div>
+              <div class="metric-value">92%</div>
+              <div class="metric-change" style="color: var(--color-primary);"><i class="fa-solid fa-fire"></i> High demand</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Active Studios</span>
+                <div class="metric-icon"><i class="fa-solid fa-door-open"></i></div>
+              </div>
+              <div class="metric-value">4 / 4</div>
+              <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> All operational</div>
+            </div>
+          </div>
+
+          <!-- Schedules Table Card -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">TODAY'S MASTER CLASS TIMETABLE</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Live class schedule across Studio A, Studio B, Studio C, and Main Floor</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="shop-pill dash-filter-btn active" data-filter-group="schedules" data-status="all" style="font-size: 0.85rem; padding: 6px 14px;">All Sessions</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="schedules" data-status="morning" style="font-size: 0.85rem; padding: 6px 14px;">Morning</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="schedules" data-status="afternoon" style="font-size: 0.85rem; padding: 6px 14px;">Afternoon</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="schedules" data-status="evening" style="font-size: 0.85rem; padding: 6px 14px;">Evening</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table class="dash-table" id="schedules-table">
+                <thead>
+                  <tr>
+                    <th>Time Slot</th>
+                    <th>Class / Session Name</th>
+                    <th>Studio / Zone</th>
+                    <th>Lead Coach</th>
+                    <th>Bookings / Cap</th>
+                    <th>Intensity &amp; Focus</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="schedules-table-body">
+                  <tr class="schedule-data-row" data-status="morning">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">06:00 AM - 07:00 AM</strong></td>
+                    <td><strong>Sunrise HIIT Shred</strong></td>
+                    <td><span class="badge badge-dark">Studio A - Functional Turf</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-1.webp" alt="Rory Webster" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Rory Webster</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: #fff;">18</strong> / 20 Registered</td>
+                    <td><span class="badge badge-lime">Max Cardio</span></td>
+                    <td><span class="status-badge status-active">Completed</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="morning">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">08:30 AM - 09:45 AM</strong></td>
+                    <td><strong>Olympic Barbell Mastery</strong></td>
+                    <td><span class="badge badge-dark">Studio B - Olympic Rig</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-3.webp" alt="Adam Walker" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Adam Walker</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: var(--color-primary);">12 / 12 (Full)</strong></td>
+                    <td><span class="badge badge-lime">Strength &amp; Power</span></td>
+                    <td><span class="status-badge status-active">In Progress</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="morning">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">10:30 AM - 11:30 AM</strong></td>
+                    <td><strong>Core &amp; Functional Calisthenics</strong></td>
+                    <td><span class="badge badge-dark">Studio A - Functional Turf</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-2.webp" alt="Elena Rostova" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Elena Rostova</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: var(--color-primary);">16 / 16 (Full)</strong></td>
+                    <td><span class="badge badge-lime">Gymnastic Core</span></td>
+                    <td><span class="status-badge status-active">In Progress</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="afternoon">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">01:00 PM - 02:00 PM</strong></td>
+                    <td><strong>Athletic Mobility &amp; Joint Flow</strong></td>
+                    <td><span class="badge badge-dark">Studio C - Combat &amp; Mobility</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-2.webp" alt="Madelyn Donin" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Madelyn Donin</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: #fff;">10</strong> / 14 Registered</td>
+                    <td><span class="badge badge-dark">Recovery Flow</span></td>
+                    <td><span class="status-badge status-pending">Upcoming</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="evening">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">05:30 PM - 06:45 PM</strong></td>
+                    <td><strong>Hypertrophy Power Chest &amp; Arms</strong></td>
+                    <td><span class="badge badge-dark">Main Strength Floor</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-2.webp" alt="Madelyn Donin" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Madelyn Donin</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: #fff;">15</strong> / 16 Registered</td>
+                    <td><span class="badge badge-lime">Hypertrophy</span></td>
+                    <td><span class="status-badge status-pending">Upcoming</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="evening">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">07:00 PM - 08:15 PM</strong></td>
+                    <td><strong>Elite Conditioning &amp; Boxing Blitz</strong></td>
+                    <td><span class="badge badge-dark">Studio C - Combat &amp; Mobility</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-1.webp" alt="Rory Webster" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Rory Webster</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: var(--color-primary);">20 / 20 (Full)</strong></td>
+                    <td><span class="badge badge-lime">Combat Endurance</span></td>
+                    <td><span class="status-badge status-pending">Upcoming</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="schedule-data-row" data-status="evening">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">08:30 PM - 09:30 PM</strong></td>
+                    <td><strong>Late Night Heavy Squats &amp; Deadlifts</strong></td>
+                    <td><span class="badge badge-dark">Studio B - Olympic Rig</span></td>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <img src="images/trainer-3.webp" alt="Adam Walker" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover;">
+                        <span>Adam Walker</span>
+                      </div>
+                    </td>
+                    <td><strong style="color: #fff;">9</strong> / 12 Registered</td>
+                    <td><span class="badge badge-dark">Heavy Power</span></td>
+                    <td><span class="status-badge status-pending">Upcoming</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Roster"><i class="fa-solid fa-list-check"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 4. TRAINERS SECTION ================= -->
+        <section id="trainers-section" class="dash-tab-content">
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">COACH ROSTER &amp; PERFORMANCE DIRECTORY</h2>
+              <p class="dash-section-subtitle">Staff trainer assignments, weekly coaching loads, active client rosters, and athlete ratings</p>
+            </div>
+            <a href="404.html" class="btn btn-outline btn-sm">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> View Public Bios
+            </a>
+          </div>
+
+          <!-- Trainer Metrics -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Certified Coaches</span>
+                <div class="metric-icon"><i class="fa-solid fa-dumbbell"></i></div>
+              </div>
+              <div class="metric-value">6</div>
+              <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> All active &amp; certified</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Active Client Roster</span>
+                <div class="metric-icon"><i class="fa-solid fa-user-group"></i></div>
+              </div>
+              <div class="metric-value">142</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +12 new clients</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Average Rating</span>
+                <div class="metric-icon"><i class="fa-solid fa-star"></i></div>
+              </div>
+              <div class="metric-value">4.96</div>
+              <div class="metric-change" style="color: var(--color-primary);"><i class="fa-solid fa-star"></i> Based on 680 reviews</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Weekly Floor Bookings</span>
+                <div class="metric-icon"><i class="fa-solid fa-clock"></i></div>
+              </div>
+              <div class="metric-value">178 hrs</div>
+              <div class="metric-change up"><i class="fa-solid fa-fire"></i> 94% roster utilization</div>
+            </div>
+          </div>
+
+          <!-- Trainers Table Card -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">MASTER COACH ROSTER</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Monitor client load, specialty domains, weekly hours, and floor availability</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="shop-pill dash-filter-btn active" data-filter-group="trainers" data-status="all" style="font-size: 0.85rem; padding: 6px 14px;">All Coaches</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="trainers" data-status="floor" style="font-size: 0.85rem; padding: 6px 14px;">On Floor</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="trainers" data-status="session" style="font-size: 0.85rem; padding: 6px 14px;">In Session</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="trainers" data-status="admin" style="font-size: 0.85rem; padding: 6px 14px;">Admin Duty</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table class="dash-table" id="trainers-table">
+                <thead>
+                  <tr>
+                    <th>Coach</th>
+                    <th>Primary Specialization</th>
+                    <th>Active Clients</th>
+                    <th>Weekly Hours</th>
+                    <th>Athlete Rating</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="trainers-table-body">
+                  <tr class="trainer-data-row" data-status="floor">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/trainer-1.webp" alt="Rory Webster" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Rory Webster</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Head Performance Director</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Hypertrophy, Olympic Powerlifting, Conditioning</td>
+                    <td><strong style="color: #fff;">28 Athletes</strong></td>
+                    <td>38 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.98 (142 reviews)</span></td>
+                    <td><span class="status-badge status-active">On Floor</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="trainer-data-row" data-status="session">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/trainer-2.webp" alt="Madelyn Donin" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Madelyn Donin</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Senior Strength Coach</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Biomechanics, Female Strength, Hypertrophy</td>
+                    <td><strong style="color: #fff;">26 Athletes</strong></td>
+                    <td>35 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.95 (118 reviews)</span></td>
+                    <td><span class="status-badge status-pending">In Session</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="trainer-data-row" data-status="floor">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/trainer-3.webp" alt="Adam Walker" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Adam Walker</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Calisthenics &amp; Power Lead</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Bodyweight Gymnastics, Olympic Rig, Barbell Power</td>
+                    <td><strong style="color: #fff;">24 Athletes</strong></td>
+                    <td>32 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.92 (96 reviews)</span></td>
+                    <td><span class="status-badge status-active">On Floor</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="trainer-data-row" data-status="session">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/trainer-2.webp" alt="Elena Rostova" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Elena Rostova</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Mobility &amp; Endurance Specialist</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Fascial Stretch, Sports Rehab, VO2 Max Running</td>
+                    <td><strong style="color: #fff;">22 Athletes</strong></td>
+                    <td>30 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.97 (104 reviews)</span></td>
+                    <td><span class="status-badge status-pending">In Session</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="trainer-data-row" data-status="admin">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/avatar-2.webp" alt="Marcus Vance" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Marcus Vance</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Club Director &amp; Elite Coach</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Executive Conditioning, Nutrition Architecture</td>
+                    <td><strong style="color: #fff;">18 Athletes</strong></td>
+                    <td>20 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.99 (210 reviews)</span></td>
+                    <td><span class="status-badge status-active">Admin Duty</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="trainer-data-row" data-status="floor">
+                    <td>
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="images/trainer-1.webp" alt="Sophia Rivera" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
+                        <div>
+                          <strong>Sophia Rivera</strong>
+                          <div style="font-size: 0.8rem; color: var(--color-primary);">Combat &amp; Agility Specialist</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Boxing Conditioning, Kettlebell Kinetics, Agility</td>
+                    <td><strong style="color: #fff;">24 Athletes</strong></td>
+                    <td>34 hrs / week</td>
+                    <td><span class="badge badge-lime"><i class="fa-solid fa-star"></i> 4.94 (88 reviews)</span></td>
+                    <td><span class="status-badge status-active">On Floor</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="View Client Roster"><i class="fa-solid fa-users"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 5. BLOG ARTICLES SECTION ================= -->
+        <section id="blog-section" class="dash-tab-content">
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">EDITORIAL CONTENT &amp; BLOG ARTICLES</h2>
+              <p class="dash-section-subtitle">Manage published health journals, training guides, nutrition articles, and athlete spotlights</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <a href="404.html" class="btn btn-outline btn-sm">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Public Blog
+              </a>
+              <a href="404.html" class="btn btn-primary btn-sm" style="text-decoration: none;">
+                <i class="fa-solid fa-pen-to-square"></i> Create New Article
+              </a>
+            </div>
+          </div>
+
+          <!-- Blog Metrics -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Published Articles</span>
+                <div class="metric-icon"><i class="fa-solid fa-newspaper"></i></div>
+              </div>
+              <div class="metric-value">24</div>
+              <div class="metric-change up"><i class="fa-solid fa-check"></i> +3 this month</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Monthly Readers</span>
+                <div class="metric-icon"><i class="fa-solid fa-eye"></i></div>
+              </div>
+              <div class="metric-value">148.2k</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +24.6% readership</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Average Read Time</span>
+                <div class="metric-icon"><i class="fa-solid fa-stopwatch"></i></div>
+              </div>
+              <div class="metric-value">4m 32s</div>
+              <div class="metric-change" style="color: var(--color-primary);"><i class="fa-solid fa-heart"></i> High engagement</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Drafts in Queue</span>
+                <div class="metric-icon"><i class="fa-solid fa-file-pen"></i></div>
+              </div>
+              <div class="metric-value">2</div>
+              <div class="metric-change" style="color: #faad14;"><i class="fa-solid fa-clock"></i> In review</div>
+            </div>
+          </div>
+
+          <!-- Blog Table Card -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">EDITORIAL ARTICLES &amp; INSIGHTS DIRECTORY</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Track views, update article metadata, or modify publication status</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="shop-pill dash-filter-btn active" data-filter-group="blog" data-status="all" style="font-size: 0.85rem; padding: 6px 14px;">All Articles</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="blog" data-status="published" style="font-size: 0.85rem; padding: 6px 14px;">Published</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="blog" data-status="draft" style="font-size: 0.85rem; padding: 6px 14px;">Drafts</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table class="dash-table" id="blog-table">
+                <thead>
+                  <tr>
+                    <th>Article Title</th>
+                    <th>Category</th>
+                    <th>Author / Coach</th>
+                    <th>Published Date</th>
+                    <th>Total Reads</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="blog-table-body">
+                  <tr class="blog-data-row" data-status="published">
+                    <td>
+                      <strong>The Science of Progressive Overload for Hypertrophy</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/progressive-overload-hypertrophy</div>
+                    </td>
+                    <td><span class="badge badge-lime">Training Science</span></td>
+                    <td>Rory Webster</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 02, 2026</td>
+                    <td><strong style="color: #fff;">28,400 Reads</strong></td>
+                    <td><span class="status-badge status-active">Published</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Preview Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Archive Article"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="blog-data-row" data-status="published">
+                    <td>
+                      <strong>Optimal Daily Protein Timing &amp; Recovery Anabolism</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/optimal-protein-timing-recovery</div>
+                    </td>
+                    <td><span class="badge badge-dark">Nutrition</span></td>
+                    <td>Madelyn Donin</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 29, 2026</td>
+                    <td><strong style="color: #fff;">34,120 Reads</strong></td>
+                    <td><span class="status-badge status-active">Published</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Preview Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Archive Article"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="blog-data-row" data-status="published">
+                    <td>
+                      <strong>Calisthenics Mastery: From First Pull-Up to Muscle-Up</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/calisthenics-mastery-progression</div>
+                    </td>
+                    <td><span class="badge badge-lime">Calisthenics</span></td>
+                    <td>Adam Walker</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 24, 2026</td>
+                    <td><strong style="color: #fff;">19,850 Reads</strong></td>
+                    <td><span class="status-badge status-active">Published</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Preview Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Archive Article"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="blog-data-row" data-status="published">
+                    <td>
+                      <strong>Neuromuscular Recovery &amp; Sleep Architecture for Athletes</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/neuromuscular-recovery-sleep</div>
+                    </td>
+                    <td><span class="badge badge-dark">Recovery</span></td>
+                    <td>Elena Rostova</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 18, 2026</td>
+                    <td><strong style="color: #fff;">22,300 Reads</strong></td>
+                    <td><span class="status-badge status-active">Published</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Preview Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Archive Article"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="blog-data-row" data-status="published">
+                    <td>
+                      <strong>Mindset &amp; Intensity: How Champions Train Through Plateaus</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/mindset-intensity-plateaus</div>
+                    </td>
+                    <td><span class="badge badge-lime">Mindset</span></td>
+                    <td>Marcus Vance</td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Oct 10, 2026</td>
+                    <td><strong style="color: #fff;">16,500 Reads</strong></td>
+                    <td><span class="status-badge status-active">Published</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Preview Article"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Archive Article"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="blog-data-row" data-status="draft">
+                    <td>
+                      <strong>Hydration &amp; Electrolyte Dynamics in High-Temp Training</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">slug: /blog/hydration-electrolyte-dynamics</div>
+                    </td>
+                    <td><span class="badge badge-dark">Nutrition</span></td>
+                    <td>Elena Rostova</td>
+                    <td style="color: #faad14; font-size: 0.85rem;">Draft Queue</td>
+                    <td><strong style="color: var(--color-text-light);">0 Reads</strong></td>
+                    <td><span class="status-badge status-pending">Draft Review</span></td>
+                    <td>
+                      <div style="display: flex; gap: 6px;">
+                        <a href="404.html" class="btn btn-outline btn-sm" title="Publish Draft"><i class="fa-solid fa-paper-plane"></i></a>
+                        <a href="404.html" class="btn btn-outline btn-sm btn-delete-row" title="Delete Draft"><i class="fa-solid fa-trash"></i></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 6. STORE ORDERS SECTION ================= -->
+        <section id="orders-section" class="dash-tab-content">
+          <div class="dash-section-header">
+            <div>
+              <h2 class="dash-section-title">PRO SHOP &amp; STORE ORDERS</h2>
+              <p class="dash-section-subtitle">Track member equipment purchases, supplement fulfillment, pickup dispatch, and sales revenue</p>
+            </div>
+            <a href="404.html" class="btn btn-primary btn-sm">
+              <i class="fa-solid fa-store"></i> Visit Member Shop
+            </a>
+          </div>
+
+          <!-- Store Orders Metrics -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Today's Store Sales</span>
+                <div class="metric-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+              </div>
+              <div class="metric-value">$2,480</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +16.2% vs yesterday</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Pending Fulfillment</span>
+                <div class="metric-icon"><i class="fa-solid fa-boxes-packing"></i></div>
+              </div>
+              <div class="metric-value">6</div>
+              <div class="metric-change" style="color: #faad14;"><i class="fa-solid fa-truck-ramp-box"></i> Requires packing</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Dispatched This Week</span>
+                <div class="metric-icon"><i class="fa-solid fa-truck-fast"></i></div>
+              </div>
+              <div class="metric-value">84</div>
+              <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> On-time delivery: 99%</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Average Order Value</span>
+                <div class="metric-icon"><i class="fa-solid fa-receipt"></i></div>
+              </div>
+              <div class="metric-value">$118.50</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +$12.30 lift</div>
+            </div>
+          </div>
+
+          <!-- Store Orders Table Card -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">RECENT PRO SHOP ORDERS</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light);">Fulfill member orders, inspect receipt invoices, and update shipping tracking</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="shop-pill dash-filter-btn active" data-filter-group="orders" data-status="all" style="font-size: 0.85rem; padding: 6px 14px;">All Orders</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="orders" data-status="processing" style="font-size: 0.85rem; padding: 6px 14px;">Processing</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="orders" data-status="shipped" style="font-size: 0.85rem; padding: 6px 14px;">Shipped</button>
+                <button class="shop-pill dash-filter-btn" data-filter-group="orders" data-status="delivered" style="font-size: 0.85rem; padding: 6px 14px;">Delivered</button>
+              </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table class="dash-table" id="orders-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer / Member</th>
+                    <th>Items Purchased</th>
+                    <th>Total Amount</th>
+                    <th>Payment Status</th>
+                    <th>Fulfillment</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                  <tr class="order-data-row" data-status="processing">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8491</strong></td>
+                    <td>
+                      <strong>Alex Mercer</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">alex.athlete@stackly.com</div>
+                    </td>
+                    <td>
+                      <strong>Stackly ISO-Whey Protein 2kg</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">+ Heavy Lifting Straps Pro</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$104.99</strong></td>
+                    <td><span class="badge badge-lime">Paid (Stripe)</span></td>
+                    <td><span class="status-badge status-pending">Ready for Floor Pickup</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 05, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="order-data-row" data-status="shipped">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8490</strong></td>
+                    <td>
+                      <strong>David Sterling</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">david.s@example.com</div>
+                    </td>
+                    <td>
+                      <strong>Pro Leather Weightlifting Belt</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">Size: Large (Black Leather)</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$79.00</strong></td>
+                    <td><span class="badge badge-lime">Paid (Apple Pay)</span></td>
+                    <td><span class="status-badge status-active">Shipped (FedEx Express)</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 04, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="order-data-row" data-status="processing">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8489</strong></td>
+                    <td>
+                      <strong>Sarah Jenkins</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">sarah.j@example.com</div>
+                    </td>
+                    <td>
+                      <strong>Stackly Pre-Workout Nitro Surge</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">+ Shaker Bottle Pro 800ml</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$58.50</strong></td>
+                    <td><span class="badge badge-lime">Paid (Visa)</span></td>
+                    <td><span class="status-badge status-pending">Processing (Packing)</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 04, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="order-data-row" data-status="shipped">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8488</strong></td>
+                    <td>
+                      <strong>Brian O'Connor</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">brian.o@example.com</div>
+                    </td>
+                    <td>
+                      <strong>Signature Oversized Pump Cover (x2)</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">Color: Acid Black, Size: XL</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$84.00</strong></td>
+                    <td><span class="badge badge-lime">Paid (Mastercard)</span></td>
+                    <td><span class="status-badge status-active">Shipped (USPS Priority)</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 03, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="order-data-row" data-status="shipped">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8487</strong></td>
+                    <td>
+                      <strong>Jessica Ryan</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">jessica.r@example.com</div>
+                    </td>
+                    <td>
+                      <strong>Stackly Creatine Monohydrate 500g</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">+ Stackly Gym Duffle Bag Pro</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$95.00</strong></td>
+                    <td><span class="badge badge-lime">Paid (Stripe)</span></td>
+                    <td><span class="status-badge status-active">Shipped (DHL Express)</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 02, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                  <tr class="order-data-row" data-status="delivered">
+                    <td><strong style="color: var(--color-primary); font-family: var(--font-heading); font-size: 1.1rem;">#STK-8486</strong></td>
+                    <td>
+                      <strong>Chloe Zhao</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">chloe.z@example.com</div>
+                    </td>
+                    <td>
+                      <strong>Knee Sleeves 7mm Neoprene (Pair)</strong>
+                      <div style="font-size: 0.8rem; color: var(--color-text-light);">+ Wrist Wraps Elastic Heavy Pair</div>
+                    </td>
+                    <td><strong style="color: #fff; font-size: 1.05rem;">$64.00</strong></td>
+                    <td><span class="badge badge-lime">Paid (Stripe)</span></td>
+                    <td><span class="status-badge status-active">Delivered (Signed)</span></td>
+                    <td style="color: var(--color-text-light); font-size: 0.85rem;">Nov 01, 2026</td>
+                    <td>
+                      <a href="404.html" class="btn btn-outline btn-sm" title="Print Invoice"><i class="fa-solid fa-receipt"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Member Interactive Modal -->
+  <div id="add-member-modal" class="dash-modal-backdrop">
+    <div class="dash-modal-dialog">
+      <div class="dash-modal-header">
+        <h3 style="font-size: 1.4rem; color: #fff; margin: 0;"><i class="fa-solid fa-user-plus text-lime"></i> REGISTER NEW STACKLY MEMBER</h3>
+        <button type="button" id="close-member-modal-btn" style="background: none; border: none; color: var(--color-text-light); font-size: 1.2rem; cursor: pointer;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <form id="add-member-form" novalidate autocomplete="off">
+        <div class="dash-modal-body">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="modal-member-name" class="form-control" placeholder="e.g. Jordan Hayes" autocomplete="off">
+            <div id="modal-member-name-error" class="field-error"></div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="modal-member-email" class="form-control" placeholder="jordan.h@example.com" autocomplete="off">
+            <div id="modal-member-email-error" class="field-error"></div>
+          </div>
+
+          <div class="form-grid" style="gap: 16px; margin-bottom: 16px;">
+            <div class="form-group">
+              <label class="form-label">Tier Plan</label>
+              <select id="modal-member-tier" class="form-control">
+                <option value="Pro Athlete" selected>Pro Athlete</option>
+                <option value="Starter Tier">Starter Tier</option>
+                <option value="Elite VIP">Elite VIP</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Assigned Coach</label>
+              <select id="modal-member-trainer" class="form-control">
+                <option value="Rory Webster" selected>Rory Webster</option>
+                <option value="Madelyn Donin">Madelyn Donin</option>
+                <option value="Adam Walker">Adam Walker</option>
+                <option value="Elena Rostova">Elena Rostova</option>
+                <option value="Unassigned">Unassigned</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label">Membership Status</label>
+            <select id="modal-member-status" class="form-control">
+              <option value="active" selected>Active</option>
+              <option value="pending">Pending Scan</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+        </div>
+        <div class="dash-modal-footer">
+          <a href="404.html" id="cancel-member-modal-btn" class="btn btn-outline btn-sm" style="text-decoration: none;">Cancel</a>
+          <a href="404.html" class="btn btn-primary btn-sm" style="text-decoration: none;">Add Member to Roster <i class="fa-solid fa-plus"></i></a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

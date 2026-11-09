@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Plans &amp; Pricing – Stackly Fitness</title>
+  <meta name="description" content="Choose the perfect Stackly membership tier with flexible monthly and annual plans, personalized training, and recovery amenities.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <span class="top-bar-item"><i class="fa-solid fa-bolt text-lime"></i> SPECIAL OFFER: Save 25% on all Annual Memberships today!</span>
+      </div>
+      <div class="top-bar-right">
+        <span class="top-bar-item"><i class="fa-solid fa-phone"></i> <a href="404.html" style="color: inherit;">+91 90909 09090</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="container header-inner">
+      <a href="index.html" class="site-logo">
+        <img src="images/stackly-logo-dark.webp" alt="Stackly Logo">
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="trainers.html" class="nav-link">Trainers</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="404.html" class="header-action-btn header-cart-btn" aria-label="Shopping Cart" title="Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-counter">1</span>
+        </a>
+
+        <a href="404.html" class="header-action-btn" title="User Account" aria-label="User Account">
+          <i class="fa-regular fa-user"></i>
+        </a>
+
+        <a href="login.html" class="btn btn-primary btn-sm btn-header-cta">
+          Get Started <span class="material-symbols-outlined">login</span>
+        </a>
+
+        <button class="hamburger-btn" aria-label="Toggle mobile menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       SECTION 1: PAGE HERO BANNER
+       ========================================================================= -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('images/pricing-hero.webp');"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+        <span class="current">Membership Plans</span>
+      </div>
+      <h1 class="page-hero-title">MEMBERSHIP &amp; <span class="text-lime">PRICING</span></h1>
+      <p class="section-desc">
+        Invest in your health with transparent pricing, zero lock-in contracts, and unlimited access to state-of-the-art training amenities.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 2: PRICING PLANS & BILLING TOGGLE
+       ========================================================================= -->
+  <section class="section-padding bg-dark">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Flexible Investment</div>
+        <h2 class="section-title">FIND THE RIGHT PLAN FOR YOUR GOALS</h2>
+        <p class="section-desc">
+          Choose between flexible month-to-month memberships or commit to your athletic future and save 25% with annual billing.
+        </p>
+
+        <!-- Interactive Billing Toggle -->
+        <div class="billing-toggle-wrap" style="margin-top: 36px;">
+          <span class="billing-label label-monthly active">Billed Monthly</span>
+          <div class="toggle-switch pricing-billing-toggle" role="button" aria-label="Toggle monthly and yearly billing">
+            <div class="toggle-slider"></div>
+          </div>
+          <span class="billing-label label-yearly">Billed Yearly <span class="badge badge-lime" style="margin-left: 6px;">SAVE 25%</span></span>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1: Starter -->
+        <div class="pricing-card reveal-up">
+          <div>
+            <h3 class="plan-name">Starter Tier</h3>
+            <p class="plan-desc">Perfect for independent athletes needing premium gym equipment &amp; facility access.</p>
+            <div class="plan-price-wrap">
+              <span class="price-currency">$</span>
+              <span class="price-amount" data-monthly-price="39" data-yearly-price="29">39</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <div class="plan-features-list">
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Standard Hours Access (06:00 - 22:00)</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Full Free Weights &amp; Cardio Loft Access</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Locker Room &amp; Rain Showers</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Stackly Mobile Workout App Sync</div>
+              <div class="plan-feature-item disabled"><i class="fa-solid fa-xmark"></i> 1-on-1 Dedicated Personal Trainer</div>
+              <div class="plan-feature-item disabled"><i class="fa-solid fa-xmark"></i> Recovery Spa &amp; Cold Plunge</div>
+            </div>
+          </div>
+
+          <a href="signup.html" class="btn btn-outline" style="width: 100%;">Choose Starter</a>
+        </div>
+
+        <!-- Plan 2: Pro Athlete (Featured) -->
+        <div class="pricing-card featured reveal-up" style="animation-delay: 0.1s;">
+          <div class="featured-ribbon">MOST POPULAR</div>
+          <div>
+            <h3 class="plan-name">Pro Athlete</h3>
+            <p class="plan-desc">Our flagship membership combining full coaching, group classes, and nutrition protocols.</p>
+            <div class="plan-price-wrap">
+              <span class="price-currency">$</span>
+              <span class="price-amount" data-monthly-price="79" data-yearly-price="59">79</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <div class="plan-features-list">
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> 24/7 Unlimited Facility Access</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> 4 Monthly 1-on-1 Personal Training Sessions</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> Unlimited High-Intensity Group Classes</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> InBody 570 Biometric Scan Every Month</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> Customized Macro Nutrition Plan</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check text-lime"></i> Infrared Sauna &amp; Recovery Lounge</div>
+            </div>
+          </div>
+
+          <a href="signup.html" class="btn btn-primary" style="width: 100%;">Join Pro Athlete</a>
+        </div>
+
+        <!-- Plan 3: Elite VIP -->
+        <div class="pricing-card reveal-up" style="animation-delay: 0.2s;">
+          <div>
+            <h3 class="plan-name">Elite VIP</h3>
+            <p class="plan-desc">Ultimate all-inclusive private training, weekly massage therapy, and priority booking.</p>
+            <div class="plan-price-wrap">
+              <span class="price-currency">$</span>
+              <span class="price-amount" data-monthly-price="129" data-yearly-price="99">129</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <div class="plan-features-list">
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Everything in Pro Athlete Tier</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> 10 Monthly 1-on-1 Private Sessions</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Dedicated Master Coach Direct WhatsApp</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Cryotherapy &amp; Weekly Sports Massage</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Free Guest Passes (2 per month)</div>
+              <div class="plan-feature-item"><i class="fa-solid fa-check"></i> Complimentary Protein Shakes &amp; Towel Service</div>
+            </div>
+          </div>
+
+          <a href="signup.html" class="btn btn-outline" style="width: 100%;">Join Elite VIP</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 3: PLAN COMPARISON MATRIX TABLE
+       ========================================================================= -->
+  <section class="section-padding bg-surface">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Detailed Breakdown</div>
+        <h2 class="section-title">COMPREHENSIVE PLAN COMPARISON</h2>
+        <p class="section-desc">
+          Compare every feature across our 3 memberships side by side to ensure you select the tier that fits your routine.
+        </p>
+      </div>
+
+      <div class="comparison-table-wrap reveal-up">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Features &amp; Benefits</th>
+              <th>Starter Tier</th>
+              <th class="featured-col">Pro Athlete Tier</th>
+              <th>Elite VIP Tier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gym Facility Access</td>
+              <td>06:00 - 22:00</td>
+              <td class="featured-col"><strong class="text-lime">24/7 Unlimited</strong></td>
+              <td><strong>24/7 Unlimited</strong></td>
+            </tr>
+            <tr>
+              <td>Coach-Led Group Classes</td>
+              <td>2 per month</td>
+              <td class="featured-col"><i class="fa-solid fa-check text-lime"></i> Unlimited</td>
+              <td><i class="fa-solid fa-check text-lime"></i> Unlimited</td>
+            </tr>
+            <tr>
+              <td>1-on-1 Personal Training</td>
+              <td><i class="fa-solid fa-minus text-muted"></i></td>
+              <td class="featured-col">4 sessions / mo</td>
+              <td>10 sessions / mo</td>
+            </tr>
+            <tr>
+              <td>Biometric InBody Scans</td>
+              <td>On Request ($25)</td>
+              <td class="featured-col"><i class="fa-solid fa-check text-lime"></i> Monthly Included</td>
+              <td><i class="fa-solid fa-check text-lime"></i> Bi-Weekly Included</td>
+            </tr>
+            <tr>
+              <td>Custom Dietary &amp; Macro Matrix</td>
+              <td>Basic Guide</td>
+              <td class="featured-col"><i class="fa-solid fa-check text-lime"></i> Personalized Matrix</td>
+              <td><i class="fa-solid fa-check text-lime"></i> Full Meal Prep Delivery Integration</td>
+            </tr>
+            <tr>
+              <td>Recovery Lounge, Cryo &amp; Sauna</td>
+              <td><i class="fa-solid fa-minus text-muted"></i></td>
+              <td class="featured-col"><i class="fa-solid fa-check text-lime"></i> Infrared Sauna</td>
+              <td><i class="fa-solid fa-check text-lime"></i> Cryotherapy + Sports Massage</td>
+            </tr>
+            <tr>
+              <td>Free Shaker &amp; Towel Service</td>
+              <td><i class="fa-solid fa-minus text-muted"></i></td>
+              <td class="featured-col"><i class="fa-solid fa-minus text-muted"></i></td>
+              <td><i class="fa-solid fa-check text-lime"></i> Daily VIP Service</td>
+            </tr>
+            <tr>
+              <td>Guest Passes</td>
+              <td><i class="fa-solid fa-minus text-muted"></i></td>
+              <td class="featured-col">1 / month</td>
+              <td>4 / month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 4: EXCLUSIVE MEMBER PERKS & AMENITIES GRID
+       ========================================================================= -->
+  <section class="section-padding bg-dark">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Stackly Standard</div>
+        <h2 class="section-title">ALL-INCLUSIVE CLUB AMENITIES</h2>
+        <p class="section-desc">
+          Every Stackly membership unlocks our premier training atmosphere, built to fuel your body and mind before, during, and after every workout.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal-up">
+          <div class="why-card-icon"><i class="fa-solid fa-fingerprint"></i></div>
+          <h3 class="why-card-title">24/7 Keyless Entry</h3>
+          <p class="why-card-desc">Access our secure facility day or night using your smartphone NFC or keycard with 24/7 monitored safety.</p>
+        </div>
+
+        <div class="why-card reveal-up" style="animation-delay: 0.1s;">
+          <div class="why-card-icon"><i class="fa-solid fa-spa"></i></div>
+          <h3 class="why-card-title">Infrared &amp; Cryo Spa</h3>
+          <p class="why-card-desc">Reduce DOMS and accelerate recovery with our Finnish dry sauna, infrared therapy rooms, and 45°F cold plunge pools.</p>
+        </div>
+
+        <div class="why-card reveal-up" style="animation-delay: 0.2s;">
+          <div class="why-card-icon"><i class="fa-solid fa-shower"></i></div>
+          <h3 class="why-card-title">Luxury Locker Suites</h3>
+          <p class="why-card-desc">Private rain showers, organic botanical shampoos, Dyson hair stations, and complimentary plush Turkish cotton towels.</p>
+        </div>
+
+        <div class="why-card reveal-up" style="animation-delay: 0.3s;">
+          <div class="why-card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h3 class="why-card-title">Stackly Member App</h3>
+          <p class="why-card-desc">Track progressive overload, book trainer sessions, view macro meal plans, and chat directly with your assigned coach.</p>
+        </div>
+
+        <div class="why-card reveal-up" style="animation-delay: 0.4s;">
+          <div class="why-card-icon"><i class="fa-solid fa-blender"></i></div>
+          <h3 class="why-card-title">Fresh Fuel Shake Bar</h3>
+          <p class="why-card-desc">Order post-workout protein smoothies made with grass-fed whey, organic fruit, and electrolytes ready right as you finish.</p>
+        </div>
+
+        <div class="why-card reveal-up" style="animation-delay: 0.5s;">
+          <div class="why-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3 class="why-card-title">Zero Hidden Fees</h3>
+          <p class="why-card-desc">No initiation fees, no cancellation penalties, and the ability to freeze your account anytime up to 60 days per year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 5: INTERACTIVE FITNESS CALCULATOR & TRIAL ESTIMATOR
+       ========================================================================= -->
+  <section class="section-padding bg-surface">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Transformation Estimator</div>
+        <h2 class="section-title">CALCULATE YOUR TIMELINE &amp; PLAN</h2>
+        <p class="section-desc">
+          Adjust the sliders below to estimate your target timeline and estimated weekly trial investment.
+        </p>
+      </div>
+
+      <div class="calc-box reveal-up">
+        <div>
+          <div class="calc-slider-group">
+            <div class="calc-slider-label">
+              <span>Weekly Workout Commitment</span>
+              <span id="calc-days-val">4 Days/Week</span>
+            </div>
+            <input type="range" id="calc-days" min="2" max="6" value="4" class="calc-range-input">
+          </div>
+
+          <div class="calc-slider-group">
+            <div class="calc-slider-label">
+              <span>Desired Body Transformation Target</span>
+              <span id="calc-weight-val">8 kg</span>
+            </div>
+            <input type="range" id="calc-weight" min="3" max="25" value="8" class="calc-range-input">
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--color-text-light); margin-top: 14px;">
+            *Calculated based on our average member metabolic progress combining 1-on-1 coaching and nutrition matrix compliance.
+          </p>
+        </div>
+
+        <div class="calc-result-card">
+          <div style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; margin-bottom: 8px;">
+            PROJECTED TRANSFORMATION TIME
+          </div>
+          <div id="calc-result-weeks" style="font-family: var(--font-heading); font-size: 3.5rem; font-weight: 900; color: #fff; line-height: 1;">
+            12 Weeks
+          </div>
+          <div style="margin: 16px 0; border-top: 1px solid var(--color-dark-border-light); padding-top: 16px;">
+            <span style="color: var(--color-text-light);">Estimated Trial Investment: </span>
+            <strong id="calc-result-cost" class="text-lime" style="font-size: 1.5rem; font-family: var(--font-heading);">$276</strong>
+          </div>
+          <a href="contact.html" class="btn btn-primary" style="width: 100%;">
+            Start Your Custom Plan <span class="material-symbols-outlined">bolt</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 6: MEMBER TRANSFORMATION STORIES
+       ========================================================================= -->
+  <section class="section-padding bg-dark">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Proven Results</div>
+        <h2 class="section-title">REAL MEMBER TRANSFORMATIONS</h2>
+        <p class="section-desc">
+          Hear how athletes and busy professionals transformed their physiques through Stackly's Pro Athlete and Elite VIP programs.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal-up">
+          <i class="fa-solid fa-quote-right testimonial-quote-icon"></i>
+          <div>
+            <div class="testimonial-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testimonial-stat-highlight">Pro Member for 14 Months</div>
+            <p class="testimonial-text">
+              "The Pro Athlete plan pays for itself. Having my coach program my lifts and analyze my InBody scans month after month kept me completely accountable. I dropped 12kg of fat while increasing my squat by 40kg."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="images/avatar-3.webp" alt="Jessica Ryan" class="testimonial-avatar">
+            <div>
+              <h4 class="author-name">Jessica Ryan</h4>
+              <p class="author-role">Attorney • Pro Athlete Member</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal-up" style="animation-delay: 0.1s;">
+          <i class="fa-solid fa-quote-right testimonial-quote-icon"></i>
+          <div>
+            <div class="testimonial-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testimonial-stat-highlight">Elite VIP for 8 Months</div>
+            <p class="testimonial-text">
+              "The recovery spa amenities, cryotherapy, and private personal training make this the premier facility in the city. The trainers understand high-performance athletics and injury prevention like nowhere else."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="images/avatar-4.webp" alt="Brian O'Connor" class="testimonial-avatar">
+            <div>
+              <h4 class="author-name">Brian O'Connor</h4>
+              <p class="author-role">Triathlete • Elite VIP Member</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal-up" style="animation-delay: 0.2s;">
+          <i class="fa-solid fa-quote-right testimonial-quote-icon"></i>
+          <div>
+            <div class="testimonial-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="testimonial-stat-highlight">Starter to Pro Member</div>
+            <p class="testimonial-text">
+              "I started with the basic gym membership and upgraded within 3 weeks because the group classes and coaching staff were so infectious. Never felt stronger or more energetic in my everyday life."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <img src="images/avatar-1.webp" alt="Nathan Drake" class="testimonial-avatar">
+            <div>
+              <h4 class="author-name">Nathan Drake</h4>
+              <p class="author-role">Product Designer • Pro Athlete Member</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 7: MEMBERSHIP FAQS ACCORDION
+       ========================================================================= -->
+  <section class="section-padding bg-surface">
+    <div class="container">
+      <div class="section-header text-center reveal-up">
+        <div class="section-tag">Have Questions?</div>
+        <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+        <p class="section-desc">
+          Everything you need to know about joining Stackly, our cancellation flexibility, and member privileges.
+        </p>
+      </div>
+
+      <div class="faq-accordion reveal-up">
+        <!-- FAQ 1 -->
+        <div class="faq-item active">
+          <div class="faq-question">
+            <span>Can I cancel or freeze my membership anytime?</span>
+            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes. Stackly memberships operate on a hassle-free basis. You can freeze your membership for up to 60 days per calendar year directly in the member portal, or cancel with 14 days notice before your next billing cycle with zero penalties.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What is included in the 7-day free trial?</span>
+            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Your 7-day free trial gives you complete 24/7 facility access, an InBody 570 body scan, one 45-minute 1-on-1 personal training consultation, and unlimited access to all coach-led group classes.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How do personal trainer session bookings work?</span>
+            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Members on Pro Athlete or Elite VIP tiers can view coach schedules and reserve 1-on-1 slots up to 14 days in advance directly through our Stackly Member Portal or mobile app.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I bring a guest to workout with me?</span>
+            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Pro Athlete members receive 1 complimentary guest day pass per month, and Elite VIP members receive 4 passes per month. Additional day passes are available at a discounted rate of $15.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Do you offer student, military, or couple discounts?</span>
+            <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes! We proudly offer a 15% discount on monthly memberships for active military, first responders, healthcare workers, full-time students, and couples signing up together. Contact front desk support to apply your discount.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 8: JOIN NOW / FREE TRIAL CONSULTATION CTA
+       ========================================================================= -->
+  <section class="section-padding bg-dark">
+    <div class="container">
+      <div class="card-dark reveal-up text-center" style="padding: 70px 40px; border-color: var(--color-primary); background: radial-gradient(circle at center, rgba(186,238,38,0.15) 0%, rgba(18,20,20,1) 75%);">
+        <div class="section-tag">Unlock Your Potential</div>
+        <h2 class="section-title" style="font-size: clamp(2.4rem, 5vw, 4rem); max-width: 800px; margin: 0 auto 20px;">
+          START YOUR 7-DAY FREE TRIAL WITH STACKLY TODAY
+        </h2>
+        <p class="section-desc" style="margin: 0 auto 36px; max-width: 620px;">
+          No payment required upfront. Experience our state-of-the-art facility, meet our master coaches, and witness the Stackly difference firsthand.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+          <a href="signup.html" class="btn btn-primary btn-lg">
+            Claim Your Free 7 Days <i class="fa-solid fa-bolt"></i>
+          </a>
+          <a href="contact.html" class="btn btn-outline btn-lg">
+            Schedule Tour &amp; Consultation <i class="fa-solid fa-calendar-check"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-about">
+          <a href="index.html" class="site-logo">
+            <img src="images/stackly-logo-dark.webp" alt="Stackly Logo">
+          </a>
+          <p>
+            Stackly is an elite performance and fitness facility helping you build sustainable strength, agility, and mental resilience.
+          </p>
+          <div style="margin-top: 14px; font-size: 0.88rem; color: var(--color-text-light); line-height: 1.6;">
+            <div><i class="fa-solid fa-location-dot text-lime"></i> MMR COMPLEX, CHINNA THIRUPATHI, NEAR CHINNA MUNIYAPPAN KOVIL, SALEM - 636 003</div>
+            <div style="margin-top: 6px;"><i class="fa-solid fa-phone text-lime"></i> <a href="404.html" style="color: inherit;">+91 90909 09090</a></div>
+            <div style="margin-top: 6px;"><i class="fa-solid fa-envelope text-lime"></i> <a href="mailto:info@stackly.com" style="color: inherit;">info@stackly.com</a></div>
+          </div>
+          <div class="footer-social" style="margin-top: 16px;">
+            <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="404.html" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="404.html" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="404.html" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="trainers.html">Trainers</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Amenities</h4>
+          <div class="footer-links">
+            <a href="membership.html">24/7 Keyless Gym Access</a>
+            <a href="membership.html">Finnish Dry Sauna &amp; Cryo</a>
+            <a href="membership.html">InBody Biometric Scans</a>
+            <a href="membership.html">Custom Nutrition Protocols</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p style="color: var(--color-text-light); margin-bottom: 16px;">
+            Join our weekly newsletter for workout tips and member-exclusive flash sales.
+          </p>
+          <form class="newsletter-form" action="javascript:void(0);" method="POST" onsubmit="return false;" novalidate autocomplete="off">
+            <div class="newsletter-input-group">
+              <input type="email" placeholder="Enter your email address" autocomplete="off">
+              <button type="submit" aria-label="Subscribe to newsletter" title="Subscribe to newsletter"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+            <div class="field-error newsletter-error"></div>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly Fitness Club. All Rights Reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Cookie Preferences</a>
+          <a href="404.html">Admin Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+      <!-- Slide-in Mobile Menu Drawer -->
+  <div class="drawer-overlay"></div>
+  <aside class="mobile-nav-drawer">
+    <div>
+      <div class="drawer-header">
+        <a href="index.html" class="site-logo">
+          <img src="images/stackly-logo-dark.webp" alt="Stackly Logo">
+        </a>
+        <button class="drawer-close" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="drawer-menu">
+        <a href="index.html" class="drawer-link"><span>Home</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a href="about.html" class="drawer-link"><span>About Us</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a href="trainers.html" class="drawer-link"><span>Trainers</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a href="blog.html" class="drawer-link"><span>Blog</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a href="contact.html" class="drawer-link"><span>Contact</span> <i class="fa-solid fa-chevron-right"></i></a>
+      </nav>
+    </div>
+
+    <div class="drawer-bottom">
+      <div class="drawer-contact-item">
+        <i class="fa-solid fa-location-dot"></i> MMR COMPLEX, CHINNA THIRUPATHI, NEAR CHINNA MUNIYAPPAN KOVIL, SALEM - 636 003
+      </div>
+      <div class="drawer-contact-item">
+        <i class="fa-solid fa-phone"></i> <a href="404.html" style="color: inherit;">+91 90909 09090</a>
+      </div>
+      <div class="drawer-contact-item">
+        <i class="fa-solid fa-envelope"></i> <a href="mailto:info@stackly.com" style="color: inherit;">info@stackly.com</a>
+      </div>
+      <div style="margin-top: 18px;">
+        <a href="login.html" class="btn btn-outline" style="width: 100%; margin-bottom: 10px;">Login</a>
+        <a href="login.html" class="btn btn-primary" style="width: 100%;">Get Started <span class="material-symbols-outlined" style="font-size: 1.1rem; vertical-align: middle;">login</span></a>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="cart-drawer">
+    <div class="cart-header">
+      <h3 class="cart-title">YOUR CART (<span class="cart-counter">1</span>)</h3>
+      <button class="drawer-close cart-close" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items-list"></div>
+    <div class="cart-footer">
+      <div class="cart-subtotal"><span>SUBTOTAL:</span><span class="cart-subtotal-val">$54.99</span></div>
+      <a href="404.html" class="btn btn-primary btn-checkout" style="width: 100%; text-decoration: none; justify-content: center; display: inline-flex; align-items: center; gap: 8px;">PROCEED TO CHECKOUT <i class="fa-solid fa-lock"></i></a>
+    </div>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Training Pathway Not Found | Stackly Health Fitness</title>
+  <meta name="description" content="The workout routine, coach profile, or fitness resource you requested is unavailable. Return to Stackly Fitness and crush your personal bests.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="images/stackly-logo-dark.webp">
+  
+  <!-- Google Fonts: Big Shoulders Display & Bricolage Grotesque -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Core & Page Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <style>
+    /* ===================================================================
+       STANDALONE THEME 404 ERROR PAGE (NO HEADER / NO FOOTER)
+       =================================================================== */
+    body {
+      min-height: 100vh;
+      background-color: #090a0a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .fitness-404-hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #090a0a;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    /* Ambient Fitness Radial Lighting Overlay */
+    .fitness-404-bg-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(186, 238, 38, 0.14) 0%, rgba(14, 15, 16, 0.8) 55%, #070808 100%),
+                  linear-gradient(to bottom, rgba(12, 13, 14, 0.4) 0%, transparent 60%, rgba(7, 8, 8, 0.95) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Subtle Athletic Mesh Background Pattern */
+    .fitness-404-mesh {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to right, rgba(186, 238, 38, 0.02) 1px, transparent 1px);
+      background-size: 32px 32px, 120px 120px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fitness-404-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* Stackly Brand Logo */
+    .fitness-404-brand {
+      margin-bottom: 24px;
+    }
+
+    .fitness-404-brand a {
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .fitness-404-brand a:hover {
+      transform: scale(1.05);
+    }
+
+    .fitness-404-brand img {
+      max-width: 180px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* High-Energy Status Badge */
+    .fitness-404-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .fitness-404-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 22px;
+      border-radius: 9999px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(186, 238, 38, 0.12);
+      color: var(--color-primary);
+      border: 1px solid rgba(186, 238, 38, 0.35);
+      box-shadow: 0 0 25px rgba(186, 238, 38, 0.2);
+    }
+
+    .fitness-404-badge .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      box-shadow: 0 0 10px var(--color-primary);
+      animation: pulseNeon 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulseNeon {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    /* Giant 404 Visual with Spinning Dumbbell Glyph */
+    .fitness-404-glamour {
+      font-size: clamp(6.5rem, 16vw, 11.5rem);
+      font-family: var(--font-heading);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 10px 0 20px;
+      text-shadow: 0 20px 45px rgba(0, 0, 0, 0.95);
+      user-select: none;
+    }
+
+    .fitness-404-num-white {
+      color: #ffffff;
+      text-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
+    }
+
+    .fitness-404-num-lime {
+      background: linear-gradient(135deg, #ffffff 0%, var(--color-primary) 50%, #9bcc1e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(186, 238, 38, 0.4));
+    }
+
+    .fitness-404-glyph-ring {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(75px, 12vw, 135px);
+      height: clamp(75px, 12vw, 135px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(186, 238, 38, 0.16) 0%, rgba(15, 16, 17, 0.85) 80%);
+      border: 3.5px dashed var(--color-primary);
+      box-shadow: 0 0 35px rgba(186, 238, 38, 0.3), inset 0 0 20px rgba(186, 238, 38, 0.15);
+      position: relative;
+      animation: rotateGlyphRing 22s linear infinite;
+    }
+
+    .fitness-404-glyph-inner {
+      animation: counterRotateGlyph 22s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fitness-404-glyph-inner .material-symbols-outlined {
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      color: var(--color-primary);
+      filter: drop-shadow(0 0 15px rgba(186, 238, 38, 0.8));
+      font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;
+    }
+
+    @keyframes rotateGlyphRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes counterRotateGlyph {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+
+    /* Headings & Description */
+    .fitness-404-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .fitness-404-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.96rem, 1.3vw, 1.1rem);
+      line-height: 1.65;
+      color: var(--color-text-light);
+      max-width: 640px;
+      margin: 0 auto 30px;
+    }
+
+    /* Action Buttons Row */
+    .fitness-404-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .btn-guidy-capsule-dark {
+      display: inline-flex;
+      align-items: center;
+      background-color: #17191a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 6px 6px 6px 28px;
+      text-decoration: none;
+      gap: 16px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-guidy-capsule-dark .capsule-text {
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .btn-guidy-capsule-dark .capsule-circle-icon {
+      width: 44px;
+      height: 44px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0b0b;
+      font-size: 15px;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-guidy-capsule-dark:hover {
+      background-color: #212527;
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn-guidy-capsule-dark:hover .capsule-circle-icon {
+      transform: translateX(4px);
+    }
+
+    /* Quick Recovery Navigation Cards Grid */
+    .fitness-404-recovery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .fitness-404-card {
+      background: #121314;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fitness-404-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--color-primary);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .fitness-404-card:hover {
+      background: #17191b;
+      border-color: rgba(186, 238, 38, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .fitness-404-card:hover::before {
+      opacity: 1;
+    }
+
+    .fitness-404-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .fitness-404-card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(186, 238, 38, 0.12);
+      color: var(--color-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .fitness-404-card-arrow {
+      color: var(--color-text-light);
+      font-size: 0.85rem;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .fitness-404-card:hover .fitness-404-card-arrow {
+      color: var(--color-primary);
+      transform: translateX(4px);
+    }
+
+    .fitness-404-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .fitness-404-card p {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: var(--color-text-light);
+      margin: 0;
+    }
+
+    /* Minimal Clean Standalone Copyright */
+    .fitness-404-copyright {
+      margin-top: 40px;
+      font-size: 0.84rem;
+      color: rgba(255, 255, 255, 0.38);
+      letter-spacing: 0.02em;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .fitness-404-recovery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .fitness-404-hero {
+        padding: 40px 0;
+      }
+      .fitness-404-recovery-grid {
+        grid-template-columns: 1fr;
+      }
+      .fitness-404-glamour {
+        gap: 8px;
+        margin: 5px 0 16px;
+      }
+      .fitness-404-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .fitness-404-actions .btn-guidy-capsule,
+      .fitness-404-actions .btn-guidy-capsule-dark {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================================
+       STANDALONE 404 CONTENT (NO HEADER / NO FOOTER)
+       =================================================================== -->
+  <main class="fitness-404-hero">
+    <!-- Atmospheric Ambient Lighting & Grid Meshes -->
+    <div class="fitness-404-bg-glow"></div>
+    <div class="fitness-404-mesh"></div>
+
+    <div class="container">
+      <div class="fitness-404-content">
+
+        <!-- Stackly Brand Logo -->
+        <div class="fitness-404-brand">
+          <a href="index.html" aria-label="Stackly Home">
+            <img src="images/stackly-logo-dark.webp" alt="Stackly Health Fitness">
+          </a>
+        </div>
+
+        <!-- Status Tag Pill -->
+        <div class="fitness-404-badge-wrap">
+          <span class="fitness-404-badge">
+            <span class="pulse-dot"></span>
+            ERROR 404 • WORKOUT PATHWAY NOT FOUND
+          </span>
+        </div>
+
+        <!-- Giant 404 Visual with Continuous Rotating Dumbbell Glyph -->
+        <div class="fitness-404-glamour" aria-label="404 Error">
+          <span class="fitness-404-num-white">4</span>
+          <div class="fitness-404-glyph-ring" title="Training Routine Off-Course">
+            <div class="fitness-404-glyph-inner">
+              <span class="material-symbols-outlined">fitness_center</span>
+            </div>
+          </div>
+          <span class="fitness-404-num-lime">4</span>
+        </div>
+
+        <!-- Theme Headline & Motivational Copy -->
+        <h1 class="fitness-404-title">
+          TRAINING <span class="text-lime">PATHWAY NOT FOUND</span>
+        </h1>
+        <p class="fitness-404-desc">
+          Looks like this workout routine or fitness resource took an unexpected rest day. We couldn't find the coach profile, training program, or athletic page you were looking for. Let's get you back on the gym floor to crush your personal bests!
+        </p>
+
+        <!-- Signature Guidy Action Buttons -->
+        <div class="fitness-404-actions">
+          <a href="index.html" class="btn-guidy-capsule">
+            <span class="capsule-text">RETURN TO HOMEPAGE</span>
+            <span class="capsule-circle-icon">
+              <span class="material-symbols-outlined">home</span>
+            </span>
+          </a>
+
+          <a href="trainers.html" class="btn-guidy-capsule btn-guidy-capsule-dark">
+            <span class="capsule-text">FIND A COACH</span>
+            <span class="capsule-circle-icon">
+              <span class="material-symbols-outlined">fitness_center</span>
+            </span>
+          </a>
+
+          <button type="button" onclick="handleGoBack()" class="btn-guidy-capsule btn-guidy-capsule-dark" aria-label="Go Back to Previous Page">
+            <span class="capsule-text">GO BACK</span>
+            <span class="capsule-circle-icon">
+              <span class="material-symbols-outlined">arrow_back</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Quick Recovery Athletic Navigation Grid -->
+        <div class="fitness-404-recovery-grid">
+          <!-- Card 1: Master Coaches -->
+          <a href="trainers.html" class="fitness-404-card">
+            <div>
+              <div class="fitness-404-card-header">
+                <div class="fitness-404-card-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="fitness-404-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <h4>Master Coaches</h4>
+              <p>8 certified master coaches specializing in strength, fat loss, and mobility.</p>
+            </div>
+          </a>
+
+          <!-- Card 2: Training Programs -->
+          <a href="index.html#programs" class="fitness-404-card">
+            <div>
+              <div class="fitness-404-card-header">
+                <div class="fitness-404-card-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                <div class="fitness-404-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <h4>Programs</h4>
+              <p>Periodized regimens engineered to maximize athletic hypertrophy and VO2 max.</p>
+            </div>
+          </a>
+
+          <!-- Card 3: Recovery & Nutrition -->
+          <a href="blog.html" class="fitness-404-card">
+            <div>
+              <div class="fitness-404-card-header">
+                <div class="fitness-404-card-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                <div class="fitness-404-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <h4>Nutrition Blog</h4>
+              <p>Macro meal prep, recovery strategies, and metabolic research breakdown.</p>
+            </div>
+          </a>
+
+          <!-- Card 4: Free Consultation -->
+          <a href="contact.html" class="fitness-404-card">
+            <div>
+              <div class="fitness-404-card-header">
+                <div class="fitness-404-card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="fitness-404-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <h4>Consultation</h4>
+              <p>Schedule your complimentary 45-min movement screening and goal mapping.</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Minimal Clean Copyright Footer -->
+        <div class="fitness-404-copyright">
+          &copy; 2026 Stackly Fitness Club. All Rights Reserved.
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Robust Go Back Handler with Safe Fallback
+    function handleGoBack() {
+      if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+        window.history.back();
+      } else if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

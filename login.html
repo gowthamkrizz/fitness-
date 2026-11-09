@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Login – Stackly Fitness</title>
+  <meta name="description" content="Sign in to your Stackly Fitness member portal to manage your workouts, schedule trainer sessions, and review your macro nutrition plans.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+  <div class="auth-page-wrapper">
+    <!-- Visual Left Side -->
+    <div class="auth-visual-side" style="background-image: url('images/auth-bg.webp');">
+      <div class="auth-visual-content">
+        <a href="index.html" class="site-logo" style="margin-bottom: 40px; display: inline-block;">
+          <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 44px;">
+        </a>
+        <div class="badge badge-lime" style="margin-bottom: 16px;">Member Access</div>
+        <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); line-height: 1; margin-bottom: 20px; color: #fff;">
+          DISCIPLINE IS THE BRIDGE BETWEEN <span class="text-lime">GOALS</span> AND RESULTS.
+        </h2>
+        <p style="color: var(--color-text-light); max-width: 480px; font-size: 1.1rem; line-height: 1.7;">
+          Track your progressive overload, view your personalized macro matrices, and communicate directly with your dedicated Master Coach.
+        </p>
+      </div>
+
+      <div class="auth-visual-content">
+        <div style="display: flex; gap: 20px; color: var(--color-text-light); font-size: 0.9rem;">
+          <span><i class="fa-solid fa-shield-halved text-lime"></i> 256-Bit SSL Encrypted</span>
+          <span><i class="fa-solid fa-bolt text-lime"></i> Instant Member Sync</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Right Side -->
+    <div class="auth-form-side">
+      <div style="max-width: 440px; width: 100%; margin: 0 auto;">
+        <div style="margin-bottom: 24px;">
+          <a href="index.html" class="site-logo" style="display: inline-block; margin-bottom: 20px;">
+            <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 38px;">
+          </a>
+          <h2 class="auth-form-title" style="font-size: 2.8rem; margin-bottom: 6px;">WELCOME BACK</h2>
+          <p style="color: var(--color-text-light); font-size: 0.95rem;">Enter your credentials to access your Stackly portal.</p>
+        </div>
+
+        <form id="login-form" autocomplete="off" novalidate>
+          <!-- Role / Target Portal Selector -->
+          <div class="role-selector-container" style="margin-bottom: 20px;">
+            <div class="role-selector-title">
+              <span><i class="fa-solid fa-right-to-bracket text-lime"></i> Destination Dashboard</span>
+              <span class="badge badge-lime" id="login-role-badge" style="font-size: 0.72rem; padding: 2px 8px;">Customer Portal</span>
+            </div>
+            <div class="role-selector-grid">
+              <label class="role-card-label" for="login-role-customer">
+                <input type="radio" name="loginRole" value="customer" id="login-role-customer" checked>
+                <div class="role-card">
+                  <div>
+                    <div class="role-card-top">
+                      <i class="fa-solid fa-user role-card-icon"></i>
+                      <div class="role-radio-indicator"></div>
+                    </div>
+                    <div class="role-card-title">Customer Dashboard</div>
+                    <div class="role-card-desc">Athlete training portal &amp; nutrition</div>
+                  </div>
+                </div>
+              </label>
+
+              <label class="role-card-label" for="login-role-admin">
+                <input type="radio" name="loginRole" value="admin" id="login-role-admin">
+                <div class="role-card">
+                  <div>
+                    <div class="role-card-top">
+                      <i class="fa-solid fa-user-shield role-card-icon"></i>
+                      <div class="role-radio-indicator"></div>
+                    </div>
+                    <div class="role-card-title">Admin Dashboard</div>
+                    <div class="role-card-desc">Club HQ director &amp; management</div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label">Email Address *</label>
+            <input type="email" id="login-email" class="form-control" placeholder="Enter your registered email" value="" autocomplete="off">
+            <div id="login-email-error" class="field-error"></div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="form-label">Password *</label>
+              <a href="404.html" class="text-lime" style="font-size: 0.8rem; font-weight: 700;">Forgot Password?</a>
+            </div>
+            <div style="position: relative;">
+              <input type="password" id="login-password" class="form-control" placeholder="Enter your password" value="" autocomplete="new-password" style="padding-right: 44px; width: 100%;">
+              <button type="button" id="toggle-password" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--color-text-light); background: transparent; border: none; cursor: pointer;" aria-label="Toggle password visibility">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <div id="login-password-error" class="field-error"></div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; font-size: 0.9rem;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--color-text-light);">
+              <input type="checkbox" checked style="accent-color: var(--color-primary);"> Remember my login
+            </label>
+            <button type="button" id="btn-clear-fields" style="background: none; border: none; color: var(--color-text-light); font-size: 0.8rem; cursor: pointer; text-decoration: underline;">
+              Clear Fields
+            </button>
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 20px;">
+            SIGN IN TO CUSTOMER PORTAL <span class="material-symbols-outlined">login</span>
+          </button>
+
+          <div style="text-align: center; color: var(--color-text-light); font-size: 0.95rem;">
+            Not a Stackly member yet? 
+            <a href="signup.html" class="text-lime" style="font-weight: 800;">Create Account</a>
+          </div>
+
+          <div style="text-align: center; margin-top: 24px;">
+            <a href="index.html" style="color: var(--color-text-light); font-size: 0.85rem; display: inline-flex; align-items: center; gap: 4px;">
+              <span class="material-symbols-outlined" style="font-size: 16px;">home</span> Return to Homepage
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    const emailInput = document.getElementById('login-email');
+    const passInput = document.getElementById('login-password');
+    const loginForm = document.getElementById('login-form');
+    const roleBadge = document.getElementById('login-role-badge');
+    const submitBtn = document.getElementById('login-submit-btn');
+    const loginRoleRadios = document.querySelectorAll('input[name="loginRole"]');
+    const errEmail = document.getElementById('login-email-error');
+    const errPass = document.getElementById('login-password-error');
+
+    // UI Error state helpers
+    function setLoginError(input, errEl, msg) {
+      if (input) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+      }
+      if (errEl) {
+        errEl.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`;
+        errEl.classList.add('active');
+      }
+      return false;
+    }
+
+    function clearLoginError(input, errEl) {
+      if (input) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+      }
+      if (errEl) {
+        errEl.innerHTML = '';
+        errEl.classList.remove('active');
+      }
+      return true;
+    }
+
+    // Role switcher logic
+    function updateLoginRoleUI() {
+      const selected = document.querySelector('input[name="loginRole"]:checked').value;
+      if (selected === 'admin') {
+        roleBadge.textContent = 'Admin Portal';
+        roleBadge.className = 'badge badge-dark';
+        roleBadge.style.color = '#fff';
+        roleBadge.style.borderColor = 'var(--color-primary)';
+        submitBtn.innerHTML = 'SIGN IN TO ADMIN PORTAL <span class="material-symbols-outlined">shield_person</span>';
+      } else {
+        roleBadge.textContent = 'Customer Portal';
+        roleBadge.className = 'badge badge-lime';
+        roleBadge.style.color = '#000';
+        submitBtn.innerHTML = 'SIGN IN TO CUSTOMER PORTAL <span class="material-symbols-outlined">login</span>';
+      }
+    }
+    loginRoleRadios.forEach(radio => radio.addEventListener('change', updateLoginRoleUI));
+
+    // Clear fields button
+    document.getElementById('btn-clear-fields').addEventListener('click', () => {
+      emailInput.value = '';
+      passInput.value = '';
+      clearLoginError(emailInput, errEmail);
+      clearLoginError(passInput, errPass);
+      showToast('Form fields cleared.');
+    });
+
+    // Password Visibility Toggle
+    const toggleBtn = document.getElementById('toggle-password');
+    toggleBtn.addEventListener('click', () => {
+      const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passInput.setAttribute('type', type);
+      toggleBtn.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
+    });
+
+    // Handle fresh redirect from signup.html
+    function handleIncomingRegistration() {
+      const params = new URLSearchParams(window.location.search);
+      const isRegistered = params.get('registered') === 'true' || params.get('registered') === '1';
+      let regEmail = params.get('email');
+      let regRole = params.get('role');
+
+      // Check sessionStorage fallback
+      const sessionFlash = sessionStorage.getItem('stackly_just_registered');
+      if (sessionFlash) {
+        try {
+          const data = JSON.parse(sessionFlash);
+          if (data && data.email) {
+            regEmail = regEmail || data.email;
+            regRole = regRole || data.role;
+          }
+        } catch (e) {}
+        sessionStorage.removeItem('stackly_just_registered');
+      }
+
+      if (isRegistered || regEmail) {
+        if (regEmail) emailInput.value = decodeURIComponent(regEmail);
+        if (regRole) {
+          const radio = document.getElementById(`login-role-${regRole}`);
+          if (radio) radio.checked = true;
+          updateLoginRoleUI();
+        }
+        showToast('Registration successful! Please enter your password to sign in.', 'success');
+        passInput.focus();
+        // Clean URL query without reload
+        if (window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      } else {
+        // Guarantee clean empty fields on initial visit
+        emailInput.value = '';
+        passInput.value = '';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', handleIncomingRegistration);
+
+    // Real-Time JavaScript Validation
+    function validateLoginEmail() {
+      const val = emailInput.value.trim().toLowerCase();
+      if (!val) {
+        return setLoginError(emailInput, errEmail, 'Email address is required.');
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(val)) {
+        return setLoginError(emailInput, errEmail, 'Please enter a valid email format (name@example.com).');
+      }
+      return clearLoginError(emailInput, errEmail);
+    }
+
+    function validateLoginPassword() {
+      const val = passInput.value;
+      if (!val) {
+        return setLoginError(passInput, errPass, 'Password is required.');
+      }
+      if (val.length < 6) {
+        return setLoginError(passInput, errPass, 'Password must be at least 6 characters long.');
+      }
+      return clearLoginError(passInput, errPass);
+    }
+
+    emailInput.addEventListener('blur', validateLoginEmail);
+    emailInput.addEventListener('input', () => {
+      if (emailInput.classList.contains('is-invalid')) validateLoginEmail();
+    });
+
+    passInput.addEventListener('blur', validateLoginPassword);
+    passInput.addEventListener('input', () => {
+      if (passInput.classList.contains('is-invalid')) validateLoginPassword();
+    });
+
+    // Default built-in accounts seeded if localStorage is empty
+    function ensureDefaultAccounts() {
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('stackly_users') || '[]');
+      } catch (err) {
+        users = [];
+      }
+
+      const defaultUsers = [
+        {
+          firstName: 'Alex',
+          lastName: 'Mercer',
+          fullName: 'Alex Mercer',
+          email: 'alex.athlete@stackly.com',
+          password: 'Athlete2026!',
+          role: 'customer',
+          plan: 'Pro Athlete Plan ($79/mo)'
+        },
+        {
+          firstName: 'Marcus',
+          lastName: 'Vance',
+          fullName: 'Marcus Vance',
+          email: 'admin@stacklyfitness.com',
+          password: 'StacklyMaster2026!',
+          role: 'admin',
+          plan: 'Club Director Tier'
+        }
+      ];
+
+      let updated = false;
+      defaultUsers.forEach(def => {
+        if (!users.some(u => u.email === def.email)) {
+          users.push(def);
+          updated = true;
+        }
+      });
+
+      if (updated) {
+        localStorage.setItem('stackly_users', JSON.stringify(users));
+      }
+      return users;
+    }
+
+    // Login Form Submit Handling
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const isEmailValid = validateLoginEmail();
+      const isPassValid = validateLoginPassword();
+
+      if (!isEmailValid || !isPassValid) {
+        showToast('Please provide valid login credentials.', 'warning');
+        const firstInvalid = loginForm.querySelector('.is-invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      const val = emailInput.value.trim().toLowerCase();
+      const pass = passInput.value;
+      const selectedRole = document.querySelector('input[name="loginRole"]:checked').value;
+
+      showToast('Authenticating credentials...', 'info');
+
+      // Load registered accounts
+      const users = ensureDefaultAccounts();
+      const foundUser = users.find(u => u.email === val);
+
+      if (!foundUser) {
+        setLoginError(emailInput, errEmail, 'No account found with this email. Please check your spelling or create an account.');
+        showToast('Account not found. Please register first.', 'error');
+        emailInput.focus();
+        return;
+      }
+
+      // Verify Password
+      if (foundUser.password && foundUser.password !== pass) {
+        setLoginError(passInput, errPass, 'Incorrect password. Please verify and try again.');
+        showToast('Incorrect password. Please try again.', 'error');
+        passInput.focus();
+        return;
+      }
+
+      // Validation succeeded
+      clearLoginError(emailInput, errEmail);
+      clearLoginError(passInput, errPass);
+
+      const targetRole = foundUser.role || selectedRole;
+      const userName = foundUser.firstName || (foundUser.fullName ? foundUser.fullName.split(' ')[0] : 'Member');
+      localStorage.setItem('stackly_current_user', JSON.stringify(foundUser));
+
+      setTimeout(() => {
+        if (targetRole === 'admin') {
+          showToast(`Welcome back, ${userName}! Opening Admin Dashboard...`, 'success');
+          setTimeout(() => {
+            window.location.href = 'admin-dashboard.html';
+          }, 600);
+        } else {
+          showToast(`Welcome back, ${userName}! Opening Athlete Portal...`, 'success');
+          setTimeout(() => {
+            window.location.href = 'customer-dashboard.html';
+          }, 600);
+        }
+      }, 600);
+    });
+  </script>
+</body>
+</html>
