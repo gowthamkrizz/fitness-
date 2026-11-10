@@ -95,31 +95,31 @@
 
           <div class="form-grid" style="gap: 16px; margin-bottom: 16px;">
             <div class="form-group">
-              <label class="form-label">First Name *</label>
+              <label class="form-label" for="signup-firstname" style="cursor: pointer;">First Name *</label>
               <input type="text" id="signup-firstname" class="form-control" placeholder="Alex" autocomplete="off">
               <div id="firstname-error" class="field-error"></div>
             </div>
             <div class="form-group">
-              <label class="form-label">Last Name *</label>
+              <label class="form-label" for="signup-lastname" style="cursor: pointer;">Last Name *</label>
               <input type="text" id="signup-lastname" class="form-control" placeholder="Mercer" autocomplete="off">
               <div id="lastname-error" class="field-error"></div>
             </div>
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label">Email Address *</label>
+            <label class="form-label" for="signup-email" style="cursor: pointer;">Email Address *</label>
             <input type="email" id="signup-email" class="form-control" placeholder="alex.mercer@example.com" autocomplete="off">
             <div id="email-error" class="field-error"></div>
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label">Phone Number *</label>
+            <label class="form-label" for="signup-phone" style="cursor: pointer;">Phone Number *</label>
             <input type="tel" id="signup-phone" class="form-control" placeholder="+91 90909 09090" autocomplete="off">
             <div id="phone-error" class="field-error"></div>
           </div>
 
           <div class="form-group" id="plan-selection-group" style="margin-bottom: 16px;">
-            <label class="form-label" id="plan-label">Select Membership Plan *</label>
+            <label class="form-label" id="plan-label" for="signup-plan" style="cursor: pointer;">Select Membership Plan *</label>
             <select id="signup-plan" class="form-control">
               <option value="pro" selected>Pro Athlete Plan ($79/mo) — 7-Day Free Trial</option>
               <option value="starter">Starter Tier ($39/mo)</option>
@@ -128,7 +128,7 @@
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label">Create Password *</label>
+            <label class="form-label" for="signup-password" style="cursor: pointer;">Create Password *</label>
             <div style="position: relative;">
               <input type="password" id="signup-password" class="form-control" placeholder="At least 6 characters (letters & numbers)" autocomplete="new-password" style="padding-right: 44px; width: 100%;">
               <button type="button" id="toggle-signup-password" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--color-text-light); background: transparent; border: none; cursor: pointer;" aria-label="Toggle password visibility">

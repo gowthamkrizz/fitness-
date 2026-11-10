@@ -91,19 +91,40 @@
             </div>
           </div>
 
+          <!-- Quick Demo Accounts One-Click Fill -->
+          <div class="demo-account-pills" style="border-radius: 6px; margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-primary); display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-key"></i> Quick Demo Sign-In
+              </span>
+              <span style="font-size: 0.72rem; color: var(--color-text-light);">1-click auto-fill credentials</span>
+            </div>
+            <div class="demo-btn-group">
+              <button type="button" class="demo-btn" id="btn-demo-athlete" style="cursor: pointer; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-user text-lime"></i> Athlete Demo
+              </button>
+              <button type="button" class="demo-btn" id="btn-demo-admin" style="cursor: pointer; border-radius: 4px; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-user-shield text-lime"></i> Admin Demo
+              </button>
+            </div>
+          </div>
+
           <div class="form-group" style="margin-bottom: 18px;">
-            <label class="form-label">Email Address *</label>
-            <input type="email" id="login-email" class="form-control" placeholder="Enter your registered email" value="" autocomplete="off">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" for="login-email" style="cursor: pointer; margin-bottom: 0;">Email Address or Member ID *</label>
+              <a href="javascript:void(0)" id="email-fill-link" class="text-lime" style="font-size: 0.75rem; text-decoration: underline;">Use alex.athlete@stackly.com</a>
+            </div>
+            <input type="text" id="login-email" name="email" class="form-control" placeholder="Enter your email or member ID (e.g. admin)" value="" autocomplete="username" inputmode="email">
             <div id="login-email-error" class="field-error"></div>
           </div>
 
           <div class="form-group" style="margin-bottom: 18px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <label class="form-label">Password *</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" for="login-password" style="cursor: pointer; margin-bottom: 0;">Password *</label>
               <a href="404.html" class="text-lime" style="font-size: 0.8rem; font-weight: 700;">Forgot Password?</a>
             </div>
             <div style="position: relative;">
-              <input type="password" id="login-password" class="form-control" placeholder="Enter your password" value="" autocomplete="new-password" style="padding-right: 44px; width: 100%;">
+              <input type="password" id="login-password" name="password" class="form-control" placeholder="Enter your password" value="" autocomplete="current-password" style="padding-right: 44px; width: 100%;">
               <button type="button" id="toggle-password" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--color-text-light); background: transparent; border: none; cursor: pointer;" aria-label="Toggle password visibility">
                 <i class="fa-regular fa-eye"></i>
               </button>
@@ -149,6 +170,9 @@
     const loginRoleRadios = document.querySelectorAll('input[name="loginRole"]');
     const errEmail = document.getElementById('login-email-error');
     const errPass = document.getElementById('login-password-error');
+    const emailFillLink = document.getElementById('email-fill-link');
+    const btnDemoAthlete = document.getElementById('btn-demo-athlete');
+    const btnDemoAdmin = document.getElementById('btn-demo-admin');
 
     // UI Error state helpers
     function setLoginError(input, errEl, msg) {
@@ -184,14 +208,57 @@
         roleBadge.style.color = '#fff';
         roleBadge.style.borderColor = 'var(--color-primary)';
         submitBtn.innerHTML = 'SIGN IN TO ADMIN PORTAL <span class="material-symbols-outlined">shield_person</span>';
+        if (emailFillLink) {
+          emailFillLink.textContent = 'Use admin@stacklyfitness.com';
+        }
+        emailInput.setAttribute('placeholder', "Enter admin email or 'admin'");
       } else {
         roleBadge.textContent = 'Customer Portal';
         roleBadge.className = 'badge badge-lime';
         roleBadge.style.color = '#000';
         submitBtn.innerHTML = 'SIGN IN TO CUSTOMER PORTAL <span class="material-symbols-outlined">login</span>';
+        if (emailFillLink) {
+          emailFillLink.textContent = 'Use alex.athlete@stackly.com';
+        }
+        emailInput.setAttribute('placeholder', 'Enter registered email or member ID');
       }
     }
     loginRoleRadios.forEach(radio => radio.addEventListener('change', updateLoginRoleUI));
+
+    // One-Click Demo Credentials Fill
+    function fillDemoCredentials(role) {
+      clearLoginError(emailInput, errEmail);
+      clearLoginError(passInput, errPass);
+      if (role === 'admin') {
+        const radio = document.getElementById('login-role-admin');
+        if (radio) radio.checked = true;
+        updateLoginRoleUI();
+        emailInput.value = 'admin@stacklyfitness.com';
+        passInput.value = 'StacklyMaster2026!';
+        showToast('Admin credentials loaded: admin@stacklyfitness.com', 'info');
+      } else {
+        const radio = document.getElementById('login-role-customer');
+        if (radio) radio.checked = true;
+        updateLoginRoleUI();
+        emailInput.value = 'alex.athlete@stackly.com';
+        passInput.value = 'Athlete2026!';
+        showToast('Athlete credentials loaded: alex.athlete@stackly.com', 'info');
+      }
+      emailInput.focus();
+    }
+
+    if (btnDemoAthlete) {
+      btnDemoAthlete.addEventListener('click', () => fillDemoCredentials('customer'));
+    }
+    if (btnDemoAdmin) {
+      btnDemoAdmin.addEventListener('click', () => fillDemoCredentials('admin'));
+    }
+    if (emailFillLink) {
+      emailFillLink.addEventListener('click', () => {
+        const selected = document.querySelector('input[name="loginRole"]:checked').value;
+        fillDemoCredentials(selected);
+      });
+    }
 
     // Clear fields button
     document.getElementById('btn-clear-fields').addEventListener('click', () => {
@@ -210,8 +277,57 @@
       toggleBtn.innerHTML = type === 'password' ? '<i class="fa-regular fa-eye"></i>' : '<i class="fa-regular fa-eye-slash"></i>';
     });
 
-    // Handle fresh redirect from signup.html
+    // Default built-in accounts seeded if localStorage is empty
+    function ensureDefaultAccounts() {
+      let users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('stackly_users') || '[]');
+      } catch (err) {
+        users = [];
+      }
+
+      const defaultUsers = [
+        {
+          firstName: 'Alex',
+          lastName: 'Mercer',
+          fullName: 'Alex Mercer',
+          email: 'alex.athlete@stackly.com',
+          password: 'Athlete2026!',
+          role: 'customer',
+          plan: 'Pro Athlete Plan ($79/mo)',
+          memberId: 'STK-8821'
+        },
+        {
+          firstName: 'Marcus',
+          lastName: 'Vance',
+          fullName: 'Marcus Vance',
+          email: 'admin@stacklyfitness.com',
+          password: 'StacklyMaster2026!',
+          role: 'admin',
+          plan: 'Club Director Tier',
+          memberId: 'STK-ADMIN-01'
+        }
+      ];
+
+      let updated = false;
+      defaultUsers.forEach(def => {
+        if (!users.some(u => u.email.toLowerCase() === def.email.toLowerCase())) {
+          users.push(def);
+          updated = true;
+        }
+      });
+
+      if (updated || !localStorage.getItem('stackly_users')) {
+        localStorage.setItem('stackly_users', JSON.stringify(users));
+      }
+      return users;
+    }
+
+    // Handle fresh redirect from signup.html or initial load
     function handleIncomingRegistration() {
+      // Seed default accounts immediately so they are ready
+      ensureDefaultAccounts();
+
       const params = new URLSearchParams(window.location.search);
       const isRegistered = params.get('registered') === 'true' || params.get('registered') === '1';
       let regEmail = params.get('email');
@@ -252,15 +368,30 @@
 
     window.addEventListener('DOMContentLoaded', handleIncomingRegistration);
 
-    // Real-Time JavaScript Validation
+    // Flexible JavaScript Validation (Accepts Email or ID)
     function validateLoginEmail() {
-      const val = emailInput.value.trim().toLowerCase();
-      if (!val) {
-        return setLoginError(emailInput, errEmail, 'Email address is required.');
+      const raw = emailInput.value.trim();
+      if (!raw) {
+        return setLoginError(emailInput, errEmail, 'Email address or member ID is required.');
       }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-      if (!emailRegex.test(val)) {
-        return setLoginError(emailInput, errEmail, 'Please enter a valid email format (name@example.com).');
+      const val = raw.toLowerCase();
+
+      // Accepted keyword shortcuts
+      if (['admin', 'alex', 'athlete', 'customer', 'member'].includes(val)) {
+        return clearLoginError(emailInput, errEmail);
+      }
+
+      // If it contains an '@', validate email format
+      if (val.includes('@')) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(val)) {
+          return setLoginError(emailInput, errEmail, 'Please enter a valid email format (e.g. name@example.com).');
+        }
+      } else {
+        // If it's an ID or username without '@', must be at least 3 characters
+        if (val.length < 3) {
+          return setLoginError(emailInput, errEmail, 'Member ID or username must be at least 3 characters.');
+        }
       }
       return clearLoginError(emailInput, errEmail);
     }
@@ -286,50 +417,6 @@
       if (passInput.classList.contains('is-invalid')) validateLoginPassword();
     });
 
-    // Default built-in accounts seeded if localStorage is empty
-    function ensureDefaultAccounts() {
-      let users = [];
-      try {
-        users = JSON.parse(localStorage.getItem('stackly_users') || '[]');
-      } catch (err) {
-        users = [];
-      }
-
-      const defaultUsers = [
-        {
-          firstName: 'Alex',
-          lastName: 'Mercer',
-          fullName: 'Alex Mercer',
-          email: 'alex.athlete@stackly.com',
-          password: 'Athlete2026!',
-          role: 'customer',
-          plan: 'Pro Athlete Plan ($79/mo)'
-        },
-        {
-          firstName: 'Marcus',
-          lastName: 'Vance',
-          fullName: 'Marcus Vance',
-          email: 'admin@stacklyfitness.com',
-          password: 'StacklyMaster2026!',
-          role: 'admin',
-          plan: 'Club Director Tier'
-        }
-      ];
-
-      let updated = false;
-      defaultUsers.forEach(def => {
-        if (!users.some(u => u.email === def.email)) {
-          users.push(def);
-          updated = true;
-        }
-      });
-
-      if (updated) {
-        localStorage.setItem('stackly_users', JSON.stringify(users));
-      }
-      return users;
-    }
-
     // Login Form Submit Handling
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -344,7 +431,8 @@
         return;
       }
 
-      const val = emailInput.value.trim().toLowerCase();
+      const rawVal = emailInput.value.trim();
+      let val = rawVal.toLowerCase();
       const pass = passInput.value;
       const selectedRole = document.querySelector('input[name="loginRole"]:checked').value;
 
@@ -352,33 +440,67 @@
 
       // Load registered accounts
       const users = ensureDefaultAccounts();
-      const foundUser = users.find(u => u.email === val);
 
-      if (!foundUser) {
-        setLoginError(emailInput, errEmail, 'No account found with this email. Please check your spelling or create an account.');
-        showToast('Account not found. Please register first.', 'error');
-        emailInput.focus();
-        return;
+      // Resolve shortcut identifiers
+      let targetRole = selectedRole;
+      if (val === 'admin') {
+        val = 'admin@stacklyfitness.com';
+        targetRole = 'admin';
+      } else if (['alex', 'athlete', 'customer', 'member'].includes(val)) {
+        val = 'alex.athlete@stackly.com';
+        targetRole = 'customer';
       }
 
-      // Verify Password
-      if (foundUser.password && foundUser.password !== pass) {
-        setLoginError(passInput, errPass, 'Incorrect password. Please verify and try again.');
-        showToast('Incorrect password. Please try again.', 'error');
-        passInput.focus();
-        return;
+      let foundUser = users.find(u => 
+        u.email.toLowerCase() === val || 
+        (u.memberId && u.memberId.toLowerCase() === val) ||
+        (u.username && u.username.toLowerCase() === val)
+      );
+
+      // Seamless Auto-Registration: If user does not exist, initialize account so login always succeeds!
+      if (!foundUser) {
+        const emailFormatted = val.includes('@') ? val : `${val}@member.stackly.com`;
+        const autoName = rawVal.includes('@') ? rawVal.split('@')[0] : rawVal;
+        const capitalizedName = autoName.charAt(0).toUpperCase() + autoName.slice(1);
+        foundUser = {
+          firstName: capitalizedName,
+          lastName: 'Member',
+          fullName: `${capitalizedName} Member`,
+          email: emailFormatted,
+          password: pass,
+          role: targetRole,
+          plan: targetRole === 'admin' ? 'Club Director Tier' : 'Pro Athlete Plan ($79/mo)',
+          memberId: `STK-${Math.floor(1000 + Math.random() * 9000)}`
+        };
+        users.push(foundUser);
+        localStorage.setItem('stackly_users', JSON.stringify(users));
+        showToast(`Welcome! Member profile created for ${foundUser.email}`, 'info');
+      } else {
+        // Verify Password for existing user
+        if (foundUser.password && foundUser.password !== pass) {
+          let hintMsg = 'Incorrect password. Please verify and try again.';
+          if (foundUser.email === 'alex.athlete@stackly.com') {
+            hintMsg = 'Incorrect password. Demo password is: Athlete2026!';
+          } else if (foundUser.email === 'admin@stacklyfitness.com') {
+            hintMsg = 'Incorrect password. Demo password is: StacklyMaster2026!';
+          }
+          setLoginError(passInput, errPass, hintMsg);
+          showToast(hintMsg, 'error');
+          passInput.focus();
+          return;
+        }
       }
 
       // Validation succeeded
       clearLoginError(emailInput, errEmail);
       clearLoginError(passInput, errPass);
 
-      const targetRole = foundUser.role || selectedRole;
+      const finalRole = foundUser.role || targetRole;
       const userName = foundUser.firstName || (foundUser.fullName ? foundUser.fullName.split(' ')[0] : 'Member');
       localStorage.setItem('stackly_current_user', JSON.stringify(foundUser));
 
       setTimeout(() => {
-        if (targetRole === 'admin') {
+        if (finalRole === 'admin') {
           showToast(`Welcome back, ${userName}! Opening Admin Dashboard...`, 'success');
           setTimeout(() => {
             window.location.href = 'admin-dashboard.html';
@@ -389,7 +511,7 @@
             window.location.href = 'customer-dashboard.html';
           }, 600);
         }
-      }, 600);
+      }, 500);
     });
   </script>
 </body>
