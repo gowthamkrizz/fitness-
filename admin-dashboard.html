@@ -15,19 +15,27 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages.css">
 </head>
-<body>
+<body class="dashboard-body">
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-backdrop" id="sidebar-backdrop"></div>
 
   <div class="dashboard-layout">
     <!-- Sidebar -->
     <aside class="dashboard-sidebar">
       <div>
-        <div class="dashboard-logo-area">
-          <a href="index.html" class="site-logo">
-            <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 36px;">
-          </a>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; letter-spacing: 0.1em; margin-top: 8px;">
-            HQ MANAGEMENT PORTAL
+        <div class="dashboard-logo-area" style="display: flex; align-items: flex-start; justify-content: space-between;">
+          <div>
+            <a href="index.html" class="site-logo">
+              <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 36px;">
+            </a>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; letter-spacing: 0.1em; margin-top: 8px;">
+              HQ MANAGEMENT PORTAL
+            </div>
           </div>
+          <button type="button" id="sidebar-close-btn" class="dash-sidebar-close-btn" aria-label="Close Navigation">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
 
         <nav class="dashboard-menu">
@@ -65,31 +73,31 @@
     <main class="dashboard-main">
       <!-- Topbar -->
       <div class="dashboard-topbar">
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <button id="sidebar-toggle-btn" class="btn btn-outline btn-sm" style="padding: 8px 12px;" aria-label="Toggle Navigation">
+        <div class="dash-topbar-left">
+          <button type="button" id="sidebar-toggle-btn" class="btn btn-outline btn-sm" style="padding: 8px 12px; flex-shrink: 0;" aria-label="Toggle Navigation">
             <i class="fa-solid fa-bars"></i>
           </button>
-          <div>
-            <h2 style="font-size: 1.45rem; color: #fff; margin-bottom: 2px; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.02em;">STACKLY CLUB HQ MANAGEMENT</h2>
-            <span style="font-size: 0.8rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 6px;">
+          <div style="min-width: 0;">
+            <h2 style="font-size: 1.35rem; color: #fff; margin-bottom: 2px; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.2;">STACKLY CLUB HQ MANAGEMENT</h2>
+            <span style="font-size: 0.78rem; color: var(--color-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-shield-halved"></i> Administrative Control Portal
             </span>
           </div>
         </div>
 
         <div class="dash-user-area">
-          <a href="404.html" id="btn-add-member-modal" class="btn btn-primary btn-sm" style="text-decoration: none;">
-            <i class="fa-solid fa-plus"></i> Add Member
-          </a>
+          <button type="button" id="btn-add-member-modal" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <i class="fa-solid fa-plus"></i> <span class="btn-text">Add Member</span>
+          </button>
 
           <div id="admin-bell-btn" style="position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); cursor: pointer;" title="Notifications">
             <i class="fa-regular fa-bell"></i>
             <span style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background-color: var(--color-primary); border-radius: 50%;"></span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
             <img src="images/avatar-2.webp" alt="Admin Avatar" class="dash-avatar">
-            <div style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+            <div class="dash-profile-meta" style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
               <div id="admin-profile-name" style="font-weight: 700; color: #fff; font-size: 0.9rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Marcus Vance</div>
               <div id="admin-profile-email" style="font-size: 0.75rem; color: var(--color-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">admin@stacklyfitness.com</div>
             </div>
@@ -1276,8 +1284,8 @@
           </div>
         </div>
         <div class="dash-modal-footer">
-          <a href="404.html" id="cancel-member-modal-btn" class="btn btn-outline btn-sm" style="text-decoration: none;">Cancel</a>
-          <a href="404.html" class="btn btn-primary btn-sm" style="text-decoration: none;">Add Member to Roster <i class="fa-solid fa-plus"></i></a>
+          <button type="button" id="cancel-member-modal-btn" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" id="submit-member-modal-btn" class="btn btn-primary btn-sm">Add Member to Roster <i class="fa-solid fa-plus"></i></button>
         </div>
       </form>
     </div>

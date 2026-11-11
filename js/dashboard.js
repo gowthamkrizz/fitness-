@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNotificationBells();
   initMobileSidebar();
   initLogoutHandler();
+  initCustomerFeatures();
 });
 
 function initLogoutHandler() {
@@ -242,6 +243,16 @@ function switchDashboardTab(rawTabId) {
     targetId = 'blog-section';
   } else if (targetId === 'orders' || targetId === 'shop') {
     targetId = 'orders-section';
+  } else if (targetId === 'workouts' || targetId === 'my-workouts') {
+    targetId = 'workouts-section';
+  } else if (targetId === 'sessions' || targetId === 'book-sessions') {
+    targetId = 'sessions-section';
+  } else if (targetId === 'nutrition' || targetId === 'meals') {
+    targetId = 'nutrition-section';
+  } else if (targetId === 'chat' || targetId === 'coach-chat') {
+    targetId = 'chat-section';
+  } else if (targetId === 'admin' || targetId === 'admin-view') {
+    targetId = 'admin-section';
   }
 
   const tabContents = document.querySelectorAll('.dash-tab-content');
@@ -284,6 +295,35 @@ function switchDashboardTab(rawTabId) {
   const dropdown = document.getElementById('admin-search-dropdown');
   if (dropdown) dropdown.style.display = 'none';
 
+  // If switching to workouts tab, re-render chart to ensure proper SVG dimensions
+  if (targetId === 'workouts-section') {
+    const customerChartWrap = document.querySelector('#customer-progression-chart');
+    if (customerChartWrap && !customerChartWrap.querySelector('svg')) {
+      customerChartWrap.innerHTML = createSvgLineChart([
+        { week: 'W1', weight: 78.0, strength: 60 },
+        { week: 'W2', weight: 77.4, strength: 65 },
+        { week: 'W3', weight: 76.8, strength: 70 },
+        { week: 'W4', weight: 76.1, strength: 72 },
+        { week: 'W5', weight: 75.5, strength: 77 },
+        { week: 'W6', weight: 74.9, strength: 82 },
+        { week: 'W7', weight: 74.4, strength: 85 },
+        { week: 'W8', weight: 74.0, strength: 90 }
+      ]);
+    }
+  }
+
+  // Close mobile sidebar drawer if open
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (sidebar && sidebar.classList.contains('active')) {
+    sidebar.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Smooth scroll to top of dashboard content on tab change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   // Apply search query to the newly opened tab
   applyActiveTabFilters();
 }
@@ -291,12 +331,25 @@ function switchDashboardTab(rawTabId) {
 function initDashboardTabs() {
   const menuItems = document.querySelectorAll('.dashboard-sidebar .dash-menu-item[data-tab]');
   const tabContents = document.querySelectorAll('.dash-tab-content');
-  if (!menuItems.length || !tabContents.length) return;
+  if (!tabContents.length) return;
 
+  // Sidebar tab menu clicks
   menuItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const targetTab = item.getAttribute('data-tab');
+      if (targetTab) {
+        history.replaceState(null, '', `#${targetTab}`);
+        switchDashboardTab(targetTab);
+      }
+    });
+  });
+
+  // In-content tab switcher buttons (e.g. "View Full Workout Plan", "Open Meal Checklist")
+  document.querySelectorAll('.btn-tab-switch[data-tab]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetTab = btn.getAttribute('data-tab');
       if (targetTab) {
         history.replaceState(null, '', `#${targetTab}`);
         switchDashboardTab(targetTab);
@@ -700,11 +753,43 @@ function initCoachChat() {
 
   chatForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = '404.html';
+    const text = chatInput.value.trim();
+    if (!text) {
+      chatInput.focus();
+      return;
+    }
+
+    // Append athlete message
+    const athleteMsg = document.createElement('div');
+    athleteMsg.style.cssText = 'align-self: flex-end; background-color: var(--color-primary); color: #000; padding: 10px 16px; border-radius: 4px; max-width: 82%; font-size: 0.95rem; font-weight: 500; line-height: 1.4; word-break: break-word;';
+    athleteMsg.textContent = text;
+    messagesBox.appendChild(athleteMsg);
+    chatInput.value = '';
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+
+    // Simulated coach response after 1 second
+    const replies = [
+      "Great question Alex! Focus on keeping your core braced and drive through the mid-foot. Let's test this in tomorrow's 8 AM session! 💪",
+      "Solid work today! Make sure you get 40g of protein in your post-workout meal and 8 hours of sleep tonight. 🔥",
+      "I reviewed your video from yesterday's deadlifts. Your bar path is perfectly vertical now. Looking rock solid!",
+      "Noted Alex! I've updated your progression matrix accordingly. Keep up the high intensity!"
+    ];
+    const replyText = replies[Math.floor(Math.random() * replies.length)];
+
+    setTimeout(() => {
+      const coachMsg = document.createElement('div');
+      coachMsg.style.cssText = 'align-self: flex-start; background-color: #1a1c1c; border: 1px solid #2e3434; color: #fff; padding: 12px 16px; border-radius: 4px; max-width: 82%; font-size: 0.95rem; line-height: 1.4; word-break: break-word;';
+      coachMsg.innerHTML = `<span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; display: block; margin-bottom: 2px;">COACH RORY</span>` + escapeHtml(replyText);
+      messagesBox.appendChild(coachMsg);
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+      if (window.showToast) {
+        window.showToast('New message from Coach Rory Webster', 'info');
+      }
+    }, 1000);
   });
 }
 
-/* ---------------- 5. INTERACTIVE DASHBOARD MODALS & 404 REDIRECTS ---------------- */
+/* ---------------- 5. INTERACTIVE DASHBOARD MODALS ---------------- */
 function initDashboardModals() {
   // --- Admin: Add Member Modal ---
   const addMemberBtn = document.getElementById('btn-add-member-modal');
@@ -713,12 +798,20 @@ function initDashboardModals() {
   const cancelMemberModalBtn = document.getElementById('cancel-member-modal-btn');
   const addMemberForm = document.getElementById('add-member-form');
 
-  if (addMemberBtn) {
+  if (addMemberBtn && addMemberModal) {
     addMemberBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.location.href = '404.html';
+      addMemberModal.classList.add('active');
     });
   }
+
+  // Support for table triggers
+  document.querySelectorAll('.btn-trigger-add-member').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (addMemberModal) addMemberModal.classList.add('active');
+    });
+  });
 
   if (addMemberModal) {
     if (closeMemberModalBtn) {
@@ -727,30 +820,76 @@ function initDashboardModals() {
     if (cancelMemberModalBtn) {
       cancelMemberModalBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = '404.html';
+        addMemberModal.classList.remove('active');
       });
     }
+    addMemberModal.addEventListener('click', (e) => {
+      if (e.target === addMemberModal) {
+        addMemberModal.classList.remove('active');
+      }
+    });
     if (addMemberForm) {
       addMemberForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        window.location.href = '404.html';
+        const nameInput = document.getElementById('modal-member-name') || addMemberForm.querySelector('input[type="text"]');
+        const emailInput = document.getElementById('modal-member-email') || addMemberForm.querySelector('input[type="email"]');
+        const nameVal = nameInput ? nameInput.value.trim() : 'New Athlete';
+        const emailVal = emailInput ? emailInput.value.trim() : 'athlete@stackly.com';
+
+        // Prepend to members table if exists
+        const tbody = document.getElementById('members-table-body');
+        if (tbody) {
+          const tr = document.createElement('tr');
+          tr.className = 'member-data-row row-highlight-flash';
+          tr.setAttribute('data-status', 'active');
+          tr.innerHTML = `
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="images/avatar-1.webp" alt="${escapeHtml(nameVal)}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <strong>${escapeHtml(nameVal)}</strong>
+              </div>
+            </td>
+            <td>${escapeHtml(emailVal)}</td>
+            <td><span class="badge badge-lime">Pro Athlete</span></td>
+            <td>Rory Webster</td>
+            <td><span class="status-badge status-active">Active</span></td>
+            <td>Just now</td>
+            <td>
+              <button class="btn btn-outline btn-sm btn-delete-row" style="padding: 4px 8px; font-size: 0.75rem;" title="Delete Member">
+                <i class="fa-solid fa-trash text-danger"></i>
+              </button>
+            </td>
+          `;
+          tbody.insertBefore(tr, tbody.firstChild);
+          updateActiveMemberCount();
+        }
+
+        addMemberModal.classList.remove('active');
+        addMemberForm.reset();
+        if (window.showToast) {
+          window.showToast(`Athlete "${nameVal}" registered successfully!`, 'success');
+        }
       });
     }
   }
 
   // --- Customer: Book Session Modal ---
   const bookSessionBtn = document.getElementById('btn-book-session-modal');
+  const bookSessionInlineBtn = document.getElementById('btn-trigger-book-inline');
   const bookSessionModal = document.getElementById('book-session-modal');
   const closeBookModalBtn = document.getElementById('close-book-modal-btn');
   const cancelBookModalBtn = document.getElementById('cancel-book-modal-btn');
   const bookSessionForm = document.getElementById('book-session-form');
 
-  if (bookSessionBtn) {
-    bookSessionBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '404.html';
-    });
-  }
+  const openBookModal = (e) => {
+    if (e) e.preventDefault();
+    if (bookSessionModal) {
+      bookSessionModal.classList.add('active');
+    }
+  };
+
+  if (bookSessionBtn) bookSessionBtn.addEventListener('click', openBookModal);
+  if (bookSessionInlineBtn) bookSessionInlineBtn.addEventListener('click', openBookModal);
 
   if (bookSessionModal) {
     if (closeBookModalBtn) {
@@ -759,30 +898,61 @@ function initDashboardModals() {
     if (cancelBookModalBtn) {
       cancelBookModalBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = '404.html';
+        bookSessionModal.classList.remove('active');
       });
     }
+    bookSessionModal.addEventListener('click', (e) => {
+      if (e.target === bookSessionModal) {
+        bookSessionModal.classList.remove('active');
+      }
+    });
+
     if (bookSessionForm) {
       bookSessionForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        window.location.href = '404.html';
+        const typeSelect = document.getElementById('modal-session-type');
+        const trainerSelect = document.getElementById('modal-trainer-name');
+        const timeSelect = document.getElementById('modal-session-time');
+
+        const sessionType = typeSelect ? typeSelect.value : '1-on-1 Performance Coaching';
+        const trainerName = trainerSelect ? trainerSelect.value : 'Rory Webster';
+        const selectedOpt = trainerSelect ? trainerSelect.options[trainerSelect.selectedIndex] : null;
+        const trainerImg = (selectedOpt && selectedOpt.getAttribute('data-img')) ? selectedOpt.getAttribute('data-img') : 'images/trainer-1.webp';
+        const sessionTime = timeSelect ? timeSelect.value : 'Tomorrow • 08:00 AM - 09:00 AM';
+
+        // Prepend to upcoming sessions list
+        const sessionsContainer = document.getElementById('sessions-list-container');
+        if (sessionsContainer) {
+          const card = document.createElement('div');
+          card.className = 'session-item-card row-highlight-flash';
+          card.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); border-left: 3px solid var(--color-primary);';
+          card.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+              <img src="${trainerImg}" alt="${escapeHtml(trainerName)}" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+              <div style="min-width: 0;">
+                <h5 style="font-size: 1.15rem; color: #fff; margin-bottom: 2px;">${escapeHtml(sessionType)}</h5>
+                <div style="font-size: 0.85rem; color: var(--color-primary);">${escapeHtml(sessionTime)} • Coach ${escapeHtml(trainerName)}</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-shrink: 0;">
+              <button type="button" class="btn btn-outline btn-sm btn-reschedule-session" title="Reschedule Session">
+                <i class="fa-solid fa-calendar"></i> Reschedule
+              </button>
+              <button type="button" class="btn btn-outline btn-sm btn-cancel-session" style="color: var(--color-danger); border-color: rgba(255,77,79,0.3);" title="Cancel Session">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          `;
+          sessionsContainer.insertBefore(card, sessionsContainer.firstChild);
+        }
+
+        bookSessionModal.classList.remove('active');
+        if (window.showToast) {
+          window.showToast(`Session booked for ${sessionTime} with ${trainerName}!`, 'success');
+        }
       });
     }
   }
-
-  // Global delegation for all section content action buttons to guarantee 404 redirect
-  document.addEventListener('click', (e) => {
-    const actionBtn = e.target.closest('.dashboard-content .btn, .dashboard-content button, .dash-modal-footer .btn');
-    if (!actionBtn) return;
-
-    // Do NOT redirect table filter buttons or mobile sidebar toggle
-    if (actionBtn.classList.contains('dash-filter-btn') || actionBtn.classList.contains('shop-pill') || actionBtn.id === 'sidebar-toggle-btn') {
-      return;
-    }
-
-    e.preventDefault();
-    window.location.href = '404.html';
-  });
 }
 
 /* ---------------- 6. NOTIFICATION BELL INTERACTIONS ---------------- */
@@ -793,7 +963,7 @@ function initNotificationBells() {
   if (customerBell) {
     customerBell.addEventListener('click', () => {
       if (window.showToast) {
-        window.showToast('You have 2 upcoming sessions this week and 1 coach note from Rory Webster!', 'info');
+        window.showToast('You have 3 scheduled sessions this week and 1 coach note from Rory Webster!', 'info');
       }
     });
   }
@@ -807,33 +977,202 @@ function initNotificationBells() {
   }
 }
 
-/* ---------------- 7. MOBILE SIDEBAR TOGGLE ---------------- */
+/* ---------------- 7. MOBILE SIDEBAR TOGGLE & DRAWER ---------------- */
 function initMobileSidebar() {
   const toggleBtn = document.getElementById('sidebar-toggle-btn');
   const sidebar = document.querySelector('.dashboard-sidebar');
-  if (!toggleBtn || !sidebar) return;
+  const backdrop = document.getElementById('sidebar-backdrop');
+  const closeBtn = document.getElementById('sidebar-close-btn');
 
-  toggleBtn.addEventListener('click', () => {
-    const isHidden = sidebar.style.display === 'none';
-    sidebar.style.display = isHidden ? 'flex' : 'none';
-    toggleBtn.innerHTML = isHidden ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+  if (!sidebar) return;
+
+  function openSidebar() {
+    sidebar.classList.add('active');
+    if (backdrop) backdrop.classList.add('active');
+    if (toggleBtn) {
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    if (toggleBtn) {
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+    document.body.style.overflow = '';
+  }
+
+  let lastToggleTime = 0;
+  function toggleSidebar(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const now = Date.now();
+    if (now - lastToggleTime < 250) return;
+    lastToggleTime = now;
+
+    if (sidebar.classList.contains('active')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', toggleSidebar);
+    // Touch support for mobile devices without double trigger
+    toggleBtn.addEventListener('touchend', (e) => {
+      toggleSidebar(e);
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeSidebar();
+    });
+    backdrop.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      closeSidebar();
+    });
+  }
+
+  // Auto-close when clicking any menu item on mobile
+  sidebar.querySelectorAll('.dash-menu-item').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 991) {
+        closeSidebar();
+      }
+    });
+  });
+
+  // Global click outside to dismiss active sidebar drawer on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 991 && sidebar.classList.contains('active')) {
+      if (!sidebar.contains(e.target) && !e.target.closest('#sidebar-toggle-btn')) {
+        closeSidebar();
+      }
+    }
+  });
+
+  // Escape key closes drawer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+      closeSidebar();
+    }
   });
 
   // Responsive reset on window resize
   window.addEventListener('resize', () => {
     if (window.innerWidth > 991) {
-      sidebar.style.display = 'flex';
-      toggleBtn.style.display = 'none';
-    } else {
-      toggleBtn.style.display = 'inline-block';
+      closeSidebar();
     }
   });
+}
 
-  if (window.innerWidth <= 991) {
-    toggleBtn.style.display = 'inline-block';
-  } else {
-    toggleBtn.style.display = 'none';
+/* ---------------- 8. CUSTOMER DASHBOARD INTERACTIVE FEATURES ---------------- */
+function initCustomerFeatures() {
+  // 1. Daily Hydration Tracker
+  let currentWaterMl = 2500;
+  const targetWaterMl = 3500;
+  const hydrationBadge = document.getElementById('hydration-badge');
+  const hydrationBar = document.getElementById('hydration-bar');
+
+  document.querySelectorAll('.btn-add-water').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const amount = parseInt(btn.getAttribute('data-amount') || 250, 10);
+      currentWaterMl = Math.min(5000, currentWaterMl + amount);
+      if (hydrationBadge) {
+        hydrationBadge.textContent = `${currentWaterMl.toLocaleString()} / ${targetWaterMl.toLocaleString()} ml`;
+      }
+      if (hydrationBar) {
+        const pct = Math.min(100, Math.round((currentWaterMl / targetWaterMl) * 100));
+        hydrationBar.style.width = `${pct}%`;
+      }
+      if (window.showToast) {
+        window.showToast(`Logged +${amount} ml hydration! Total: ${currentWaterMl} ml`, 'success');
+      }
+    });
+  });
+
+  // 2. Workout Set Logging Form
+  const workoutForm = document.getElementById('workout-log-form');
+  const exerciseNameInput = document.getElementById('log-exercise-name');
+  const exerciseSetsInput = document.getElementById('log-exercise-sets');
+  const exerciseRepsInput = document.getElementById('log-exercise-reps');
+  const exerciseWeightInput = document.getElementById('log-exercise-weight');
+  const loggedList = document.getElementById('workout-logged-list');
+
+  if (workoutForm && exerciseNameInput && loggedList) {
+    workoutForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = exerciseNameInput.value.trim();
+      if (!name) {
+        exerciseNameInput.focus();
+        return;
+      }
+      const sets = exerciseSetsInput ? exerciseSetsInput.value : '4';
+      const reps = exerciseRepsInput ? exerciseRepsInput.value : '10';
+      const weight = exerciseWeightInput ? exerciseWeightInput.value : '80';
+
+      const entry = document.createElement('div');
+      entry.className = 'row-highlight-flash';
+      entry.style.cssText = 'display: flex; justify-content: space-between; font-size: 0.85rem; padding: 8px 10px; background: var(--color-dark-surface); border: 1px solid var(--color-dark-border);';
+      entry.innerHTML = `
+        <span style="color: #fff;"><strong>${escapeHtml(name)}:</strong> ${escapeHtml(sets)} sets × ${escapeHtml(reps)} reps</span>
+        <span class="text-lime" style="font-weight: 700;">${escapeHtml(weight)} kg</span>
+      `;
+      loggedList.insertBefore(entry, loggedList.firstChild);
+
+      exerciseNameInput.value = '';
+      if (window.showToast) {
+        window.showToast(`Saved ${sets} sets of ${name} @ ${weight}kg to workout log!`, 'success');
+      }
+    });
   }
+
+  // 3. Session Reschedule & Cancel delegations
+  document.addEventListener('click', (e) => {
+    const cancelBtn = e.target.closest('.btn-cancel-session');
+    if (cancelBtn) {
+      e.preventDefault();
+      const card = cancelBtn.closest('.session-item-card');
+      if (card) {
+        card.style.opacity = '0.35';
+        card.style.pointerEvents = 'none';
+        const titleEl = card.querySelector('h5');
+        const sessionTitle = titleEl ? titleEl.textContent : 'Training Session';
+        if (window.showToast) {
+          window.showToast(`Cancelled "${sessionTitle}". Coach has been notified.`, 'info');
+        }
+      }
+    }
+
+    const rescheduleBtn = e.target.closest('.btn-reschedule-session');
+    if (rescheduleBtn) {
+      e.preventDefault();
+      const bookModal = document.getElementById('book-session-modal');
+      if (bookModal) {
+        bookModal.classList.add('active');
+        if (window.showToast) {
+          window.showToast('Select a new appointment slot from the calendar modal.', 'info');
+        }
+      }
+    }
+  });
 }
 
 // Utility HTML escaper

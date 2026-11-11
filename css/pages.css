@@ -2269,6 +2269,9 @@ select.form-control option {
   display: flex;
   min-height: 100vh;
   background-color: #080909;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .dashboard-sidebar {
@@ -2280,9 +2283,12 @@ select.form-control option {
   justify-content: space-between;
   padding: 24px;
   flex-shrink: 0;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  bottom: 0;
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   z-index: 100;
 }
@@ -2338,14 +2344,23 @@ select.form-control option {
 }
 
 .dashboard-main {
+  margin-left: 270px;
+  padding-top: 74px;
+  width: calc(100% - 270px);
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow-x: clip;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .dashboard-topbar {
+  position: fixed;
+  top: 0;
+  left: 270px;
+  right: 0;
   height: 74px;
   background-color: rgba(11, 12, 12, 0.96);
   backdrop-filter: blur(14px);
@@ -2355,10 +2370,9 @@ select.form-control option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
-  top: 0;
   z-index: 95;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
 }
 
 .dash-metrics-grid {
@@ -2894,40 +2908,540 @@ select.form-control option {
 }
 
 @media (max-width: 991px) {
+  body.dashboard-body,
+  body:has(.dashboard-layout) {
+    padding-top: 0 !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
   .dashboard-layout {
     flex-direction: column;
-  }
-  .dashboard-sidebar {
-    position: static;
-    height: auto;
+    min-height: 100vh;
     width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
-    overflow-y: visible;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
+
+  /* Fixed Header Menu Bar on Mobile - Never scrolls away */
+  .dashboard-topbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+    padding: 0 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    z-index: 999 !important;
+    box-sizing: border-box !important;
+    background-color: rgba(11, 12, 12, 0.98) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Main content offset so it never overlaps the fixed header */
+  .dashboard-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-top: 64px !important;
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fixed Off-canvas mobile sidebar drawer */
+  .dashboard-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    background-color: #0b0c0c !important;
+    border-right: 1px solid var(--color-border) !important;
+    border-bottom: none !important;
+    z-index: 1050 !important;
+    transform: translateX(-105%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.9) !important;
+    overflow-y: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding: 20px 18px !important;
+    pointer-events: none;
+  }
+
+  .dashboard-sidebar.active {
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+
+  /* Backdrop overlay */
+  .dash-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .dash-sidebar-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dash-sidebar-close-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .dash-sidebar-close-btn:hover,
+  .dash-sidebar-close-btn:active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #000;
+  }
+
+  /* Fixed Header Menu Bar Hamburger Toggle */
+  #sidebar-toggle-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid var(--color-border) !important;
+    color: #fff !important;
+    font-size: 1.15rem !important;
+    transition: all 0.2s ease !important;
+    touch-action: manipulation;
+  }
+
+  #sidebar-toggle-btn:hover,
+  #sidebar-toggle-btn:active,
+  #sidebar-toggle-btn.active {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: #000 !important;
+  }
+
+  #sidebar-toggle-btn i {
+    pointer-events: none !important;
+  }
+
+  .dash-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .dash-topbar-left h2 {
+    font-size: 1.15rem !important;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+    margin: 0;
+  }
+
+  .dash-topbar-left span {
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 220px;
+  }
+
+  .dash-user-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+  }
+
   .dash-two-col,
   .dash-two-col-unequal {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
-  .dashboard-topbar {
-    position: sticky;
-    top: 0;
-    height: auto;
-    padding: 16px 20px;
-    flex-wrap: wrap;
-    gap: 14px;
-    z-index: 95;
-  }
-  .dash-user-area {
+
+  .dashboard-content {
+    padding: 18px 14px;
+    box-sizing: border-box;
     width: 100%;
-    justify-content: space-between;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
+
+  .dash-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .metric-card {
+    padding: 16px;
+  }
+
+  .metric-value {
+    font-size: 2.2rem;
+  }
+
   .dash-search {
     width: 100%;
   }
+
   .dash-search-results-dropdown {
     min-width: 100%;
     width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Ultra-clean Single Line Fixed Header on Phone Screens */
+  .dashboard-topbar {
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .dashboard-main {
+    padding-top: 56px !important;
+  }
+
+  .dash-topbar-left {
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
+  }
+
+  #sidebar-toggle-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .dash-topbar-left h2,
+  #customer-greeting {
+    font-size: 0.92rem !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 125px !important;
+    margin: 0 !important;
+  }
+
+  .dash-topbar-left span,
+  #customer-streak {
+    font-size: 0.65rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    max-width: 125px !important;
+  }
+
+  .dash-user-area {
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  #btn-add-member-modal,
+  #btn-book-session-modal {
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
+    height: 32px !important;
+    white-space: nowrap !important;
+    gap: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  #customer-bell-btn,
+  #admin-bell-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .dash-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Completely hide name and email text on small screens so they never overflow */
+  .dash-profile-meta,
+  #customer-profile-name,
+  #customer-profile-email,
+  #admin-profile-name,
+  #admin-profile-email {
+    display: none !important;
+  }
+
+  /* Content area styling - strictly no overflow */
+  .dashboard-content {
+    padding: 12px 8px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .dash-section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .dash-section-title {
+    font-size: 1.25rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 2px !important;
+    word-break: break-word !important;
+  }
+
+  .dash-section-subtitle {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .dash-metrics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .metric-card {
+    padding: 14px 12px !important;
+  }
+
+  .metric-value {
+    font-size: 1.9rem !important;
+  }
+
+  .chart-box,
+  .dash-table-card {
+    padding: 14px 10px !important;
+    margin-bottom: 14px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .dash-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .dash-card-title {
+    font-size: 1.15rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Chat Box Mobile Fixes */
+  #coach-messages-box {
+    height: 220px !important;
+    padding: 10px 8px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  #coach-messages-box > div {
+    max-width: 88% !important;
+    font-size: 0.85rem !important;
+    padding: 8px 10px !important;
+    line-height: 1.35 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  #coach-chat-form {
+    gap: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #coach-chat-input {
+    font-size: 0.82rem !important;
+    padding: 8px 10px !important;
+    min-width: 0 !important;
+  }
+
+  #btn-send-coach-msg {
+    padding: 8px 12px !important;
+    font-size: 0.82rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Workout Grid Fixes */
+  #workout-log-form div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Meal items fixes */
+  .meal-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    padding: 10px 8px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .meal-item label {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .meal-item > span {
+    align-self: flex-start !important;
+    margin-left: 28px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Sessions Cards Mobile Fixes */
+  .session-item-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 12px 10px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .session-item-card > div:last-child {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .dash-modal-dialog {
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+  }
+
+  .dash-modal-header,
+  .dash-modal-body,
+  .dash-modal-footer {
+    padding: 12px 14px !important;
+  }
+}
+
+/* Mobile devices (<= 480px) */
+@media (max-width: 480px) {
+  #btn-add-member-modal .btn-text,
+  #btn-book-session-modal .btn-text {
+    display: none !important;
+  }
+  #btn-add-member-modal,
+  #btn-book-session-modal {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .dash-topbar-left h2,
+  #customer-greeting {
+    max-width: 110px !important;
+    font-size: 0.88rem !important;
+  }
+  .dash-topbar-left span,
+  #customer-streak {
+    max-width: 110px !important;
+    font-size: 0.62rem !important;
+  }
+}
+
+/* Extra small devices (like 320px in DevTools) */
+@media (max-width: 360px) {
+  .dash-topbar-left h2,
+  #customer-greeting {
+    max-width: 90px !important;
+    font-size: 0.8rem !important;
+  }
+  .dash-topbar-left span,
+  #customer-streak {
+    max-width: 90px !important;
+    font-size: 0.58rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .dash-sidebar-close-btn,
+  .dash-sidebar-backdrop {
+    display: none !important;
+  }
+  #sidebar-toggle-btn {
+    display: none !important;
+  }
+  .dashboard-sidebar {
+    transform: none !important;
+    pointer-events: auto !important;
   }
 }
 

@@ -3,60 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Portal – Stackly Fitness</title>
+  <title>Athlete Portal – Stackly Fitness</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Google Material Symbols Outlined -->
+  <!-- Google Material Symbols Outlined -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages.css">
 </head>
-<body>
+<body class="dashboard-body">
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-backdrop" id="sidebar-backdrop"></div>
 
   <div class="dashboard-layout">
     <!-- Sidebar -->
     <aside class="dashboard-sidebar">
       <div>
-        <div class="dashboard-logo-area">
-          <a href="index.html" class="site-logo">
-            <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 36px;">
-          </a>
-          <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; letter-spacing: 0.1em; margin-top: 8px;">
-            ATHLETE PORTAL
+        <div class="dashboard-logo-area" style="display: flex; align-items: flex-start; justify-content: space-between;">
+          <div>
+            <a href="index.html" class="site-logo">
+              <img src="images/stackly-logo-dark.webp" alt="Stackly Logo" style="height: 36px;">
+            </a>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--color-primary); font-weight: 800; letter-spacing: 0.1em; margin-top: 8px;">
+              ATHLETE PORTAL
+            </div>
           </div>
+          <button type="button" id="sidebar-close-btn" class="dash-sidebar-close-btn" aria-label="Close Navigation">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
 
         <nav class="dashboard-menu">
-          <a href="customer-dashboard.html" class="dash-menu-item active">
+          <a href="#overview-section" class="dash-menu-item active" data-tab="overview-section">
             <i class="fa-solid fa-house"></i> Overview
           </a>
-          <a href="#workouts-section" class="dash-menu-item">
+          <a href="#workouts-section" class="dash-menu-item" data-tab="workouts-section">
             <i class="fa-solid fa-dumbbell"></i> My Workouts
           </a>
-          <a href="trainers.html" class="dash-menu-item">
-            <i class="fa-solid fa-users"></i> Master Trainers
-          </a>
-          <a href="blog.html" class="dash-menu-item">
-            <i class="fa-solid fa-newspaper"></i> Blog &amp; Insights
-          </a>
-          <a href="#sessions-section" class="dash-menu-item">
+          <a href="#sessions-section" class="dash-menu-item" data-tab="sessions-section">
             <i class="fa-solid fa-calendar-check"></i> Book Sessions
           </a>
-          <a href="#nutrition-section" class="dash-menu-item">
+          <a href="#nutrition-section" class="dash-menu-item" data-tab="nutrition-section">
             <i class="fa-solid fa-apple-whole"></i> Nutrition Plan
           </a>
-          <a href="#chat-section" class="dash-menu-item">
+          <a href="#chat-section" class="dash-menu-item" data-tab="chat-section">
             <i class="fa-solid fa-comment-dots"></i> Coach Chat
-          </a>
-          <a href="shop.html" class="dash-menu-item">
-            <i class="fa-solid fa-cart-shopping"></i> Member Shop
-          </a>
-          <a href="admin-dashboard.html" class="dash-menu-item">
-            <i class="fa-solid fa-user-shield"></i> Admin View
           </a>
         </nav>
       </div>
@@ -74,31 +70,31 @@
     <main class="dashboard-main">
       <!-- Topbar -->
       <div class="dashboard-topbar">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <button id="sidebar-toggle-btn" class="btn btn-outline btn-sm" style="padding: 8px 12px;" aria-label="Toggle Navigation">
+        <div class="dash-topbar-left">
+          <button type="button" id="sidebar-toggle-btn" class="btn btn-outline btn-sm" style="padding: 8px 12px; flex-shrink: 0;" aria-label="Toggle Navigation">
             <i class="fa-solid fa-bars"></i>
           </button>
-          <div>
-            <h2 id="customer-greeting" style="font-size: 1.6rem; color: #fff; margin-bottom: 2px;">WELCOME BACK, ALEX!</h2>
+          <div style="min-width: 0;">
+            <h2 id="customer-greeting" style="font-size: 1.5rem; color: #fff; margin-bottom: 2px; line-height: 1.2;">WELCOME BACK, ALEX!</h2>
             <span id="customer-streak" style="font-size: 0.8rem; color: var(--color-text-light);">Pro Athlete Member • 4 Days Streak 🔥</span>
           </div>
         </div>
 
         <div class="dash-user-area">
-          <a href="404.html" id="btn-book-session-modal" class="btn btn-primary btn-sm" style="text-decoration: none;">
-            <i class="fa-solid fa-plus"></i> Book Session
-          </a>
+          <button type="button" id="btn-book-session-modal" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+            <i class="fa-solid fa-plus"></i> <span class="btn-text">Book Session</span>
+          </button>
 
-          <div id="customer-bell-btn" style="position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); cursor: pointer;" title="Notifications">
+          <div id="customer-bell-btn" style="position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); cursor: pointer; flex-shrink: 0;" title="Notifications">
             <i class="fa-regular fa-bell"></i>
             <span style="position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background-color: var(--color-primary); border-radius: 50%;"></span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px; min-width: 0;">
             <img src="images/avatar-1.webp" alt="Alex Mercer" class="dash-avatar">
-            <div style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
-              <div id="customer-profile-name" style="font-weight: 700; color: #fff; font-size: 0.9rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">Alex Mercer</div>
-              <div id="customer-profile-email" style="font-size: 0.75rem; color: var(--color-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">alex.athlete@stackly.com</div>
+            <div class="dash-profile-meta" style="display: flex; flex-direction: column; justify-content: center; min-width: 0;">
+              <div id="customer-profile-name" style="font-weight: 700; color: #fff; font-size: 0.9rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px;">Alex Mercer</div>
+              <div id="customer-profile-email" style="font-size: 0.75rem; color: var(--color-primary); line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px;">alex.athlete@stackly.com</div>
             </div>
           </div>
         </div>
@@ -106,206 +102,604 @@
 
       <!-- Content Area -->
       <div class="dashboard-content">
-        <!-- Metrics Row -->
-        <div class="dash-metrics-grid">
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Monthly Workouts</span>
-              <div class="metric-icon"><i class="fa-solid fa-dumbbell"></i></div>
-            </div>
-            <div class="metric-value">18 <span style="font-size: 1.4rem; color: var(--color-text-light);">/ 24</span></div>
-            <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> On track to hit target</div>
-          </div>
 
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Calories Burned</span>
-              <div class="metric-icon"><i class="fa-solid fa-fire"></i></div>
-            </div>
-            <div class="metric-value">14,250</div>
-            <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +1,400 kcal vs last week</div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Next 1-on-1 Session</span>
-              <div class="metric-icon"><i class="fa-regular fa-clock"></i></div>
-            </div>
-            <div class="metric-value" style="font-size: 2rem;">Tomorrow</div>
-            <div class="metric-change" style="color: var(--color-primary);">08:00 AM • Rory Webster</div>
-          </div>
-
-          <div class="metric-card">
-            <div class="metric-header">
-              <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Current Weight</span>
-              <div class="metric-icon"><i class="fa-solid fa-weight-scale"></i></div>
-            </div>
-            <div class="metric-value">74.0 <span style="font-size: 1.4rem; color: var(--color-text-light);">kg</span></div>
-            <div class="metric-change up"><i class="fa-solid fa-arrow-trend-down"></i> -4.0 kg overall loss</div>
-          </div>
-        </div>
-
-        <!-- Visual Progression Chart -->
-        <div id="workouts-section" class="chart-box">
-          <div class="dash-card-header">
+        <!-- ================= 1. OVERVIEW SECTION ================= -->
+        <section id="overview-section" class="dash-tab-content active">
+          <div class="dash-section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
             <div>
-              <h3 class="dash-card-title">YOUR 8-WEEK PROGRESSION MATRIX</h3>
-              <p style="font-size: 0.85rem; color: var(--color-text-light);">Strength overload index (green) vs body weight decline (dashed white)</p>
+              <h2 class="dash-section-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 4px;">ATHLETE PERFORMANCE OVERVIEW</h2>
+              <p class="dash-section-subtitle" style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">Real-time physical readiness, training volume, active streak, and daily nutrition targets</p>
             </div>
-            <div style="display: flex; gap: 16px; font-size: 0.85rem; align-items: center;">
-              <span><span style="display:inline-block; width: 14px; height: 3px; background-color: var(--color-primary); vertical-align: middle; margin-right: 4px;"></span> Strength Index</span>
-              <span><span style="display:inline-block; width: 14px; height: 2px; border-top: 2px dashed #fff; vertical-align: middle; margin-right: 4px;"></span> Body Weight (kg)</span>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <span class="badge badge-lime"><i class="fa-solid fa-fire fa-beat"></i> 4 DAYS STREAK</span>
+              <span class="badge badge-dark"><i class="fa-solid fa-shield-halved"></i> PRO ATHLETE</span>
             </div>
           </div>
-          <div id="customer-progression-chart" class="svg-chart-wrap">
-            <!-- Injected by js/dashboard.js -->
-          </div>
-        </div>
 
-        <!-- Upcoming Sessions & Meal Checklist Row -->
-        <div class="dash-two-col-unequal">
-          <!-- Upcoming Sessions -->
-          <div id="sessions-section" class="dash-table-card">
+          <!-- Metrics Row -->
+          <div class="dash-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Monthly Workouts</span>
+                <div class="metric-icon"><i class="fa-solid fa-dumbbell"></i></div>
+              </div>
+              <div class="metric-value">18 <span style="font-size: 1.4rem; color: var(--color-text-light);">/ 24</span></div>
+              <div class="metric-change up"><i class="fa-solid fa-circle-check"></i> On track to hit target</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Calories Burned</span>
+                <div class="metric-icon"><i class="fa-solid fa-fire"></i></div>
+              </div>
+              <div class="metric-value">14,250</div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-up"></i> +1,400 kcal vs last week</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Next 1-on-1 Session</span>
+                <div class="metric-icon"><i class="fa-regular fa-clock"></i></div>
+              </div>
+              <div class="metric-value" style="font-size: 2rem;">Tomorrow</div>
+              <div class="metric-change" style="color: var(--color-primary);"><i class="fa-solid fa-calendar-check"></i> 08:00 AM • Rory Webster</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="text-muted" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700;">Current Weight</span>
+                <div class="metric-icon"><i class="fa-solid fa-weight-scale"></i></div>
+              </div>
+              <div class="metric-value">74.0 <span style="font-size: 1.4rem; color: var(--color-text-light);">kg</span></div>
+              <div class="metric-change up"><i class="fa-solid fa-arrow-trend-down"></i> -4.0 kg overall loss</div>
+            </div>
+          </div>
+
+          <!-- Overview 2-Column Summary Cards -->
+          <div class="dash-two-col">
+            <!-- Today's Training Schedule & Readiness -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">TODAY'S WORKOUT PROGRAM</h3>
+                  <p style="font-size: 0.85rem; color: var(--color-text-light); margin: 0;">Periodization Block: Hypertrophy &amp; Power Phase 2</p>
+                </div>
+                <span class="badge badge-lime">Ready Score: 94%</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                <div style="padding: 14px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); border-left: 3px solid var(--color-primary);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+                    <strong style="color: #fff; font-size: 1.05rem;">Heavy Push &amp; Triceps Overload</strong>
+                    <span class="badge badge-dark">60 Mins</span>
+                  </div>
+                  <div style="font-size: 0.85rem; color: var(--color-text-light);">Barbell Bench 4x8 • DB Incline Press 3x10 • Dips 3x15 • Overhead Extensions</div>
+                </div>
+
+                <div style="padding: 14px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 6px;">
+                    <strong style="color: #fff;">Tomorrow's 1-on-1 Performance Session</strong>
+                    <span class="text-lime" style="font-size: 0.85rem; font-weight: 700;">08:00 AM</span>
+                  </div>
+                  <div style="font-size: 0.85rem; color: var(--color-text-light);">Strength testing &amp; pull-up load with Coach Rory Webster.</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-primary btn-sm btn-tab-switch" data-tab="workouts-section">
+                  <i class="fa-solid fa-dumbbell"></i> View Full Workout Plan
+                </button>
+                <button type="button" class="btn btn-outline btn-sm btn-tab-switch" data-tab="sessions-section">
+                  <i class="fa-regular fa-calendar-plus"></i> Manage Sessions
+                </button>
+              </div>
+            </div>
+
+            <!-- Daily Nutrition & Macro Matrix Summary -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">NUTRITION &amp; MACRO TARGETS</h3>
+                  <p style="font-size: 0.85rem; color: var(--color-text-light); margin: 0;">Daily Target: 2,220 kcal • Precision Fueling</p>
+                </div>
+                <span class="badge badge-lime" id="overview-cals-badge">1,520 / 2,220 kcal</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                <!-- Protein Bar -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                    <span style="color: #fff;"><strong>Protein</strong> (Target: 185g)</span>
+                    <span class="text-lime" style="font-weight: 700;">145g / 185g (78%)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 78%; height: 100%; background-color: var(--color-primary);"></div>
+                  </div>
+                </div>
+
+                <!-- Carbs Bar -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                    <span style="color: #fff;"><strong>Carbohydrates</strong> (Target: 220g)</span>
+                    <span style="color: #faad14; font-weight: 700;">170g / 220g (77%)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 77%; height: 100%; background-color: #faad14;"></div>
+                  </div>
+                </div>
+
+                <!-- Fats Bar -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+                    <span style="color: #fff;"><strong>Healthy Fats</strong> (Target: 65g)</span>
+                    <span style="color: #00d084; font-weight: 700;">48g / 65g (74%)</span>
+                  </div>
+                  <div style="width: 100%; height: 6px; background-color: #222; border-radius: 3px; overflow: hidden;">
+                    <div style="width: 74%; height: 100%; background-color: #00d084;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-outline btn-sm btn-tab-switch" data-tab="nutrition-section">
+                  <i class="fa-solid fa-apple-whole"></i> Open Meal Checklist
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coach Communication Callout -->
+          <div class="dash-table-card" style="border-left: 3px solid var(--color-primary);">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+              <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                <img src="images/trainer-1.webp" alt="Coach Rory" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary); flex-shrink: 0;">
+                <div style="min-width: 0;">
+                  <h4 style="font-size: 1.2rem; color: #fff; margin-bottom: 2px;">LATEST NOTE FROM COACH RORY</h4>
+                  <p style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">"140kg deadlift looked rock solid! Remember to keep lats engaged before pulling. See you tomorrow 8 AM."</p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm btn-tab-switch" data-tab="chat-section">
+                <i class="fa-solid fa-comment-dots"></i> Reply in Coach Chat
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 2. WORKOUTS SECTION ================= -->
+        <section id="workouts-section" class="dash-tab-content">
+          <div class="dash-section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="dash-section-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 4px;">ATHLETE WORKOUT MATRIX &amp; PROGRESSION</h2>
+              <p class="dash-section-subtitle" style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">Periodized training regimen, strength overload trajectory, and personal lifting records</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="badge badge-lime"><i class="fa-solid fa-trophy"></i> 4 PRs THIS CYCLE</span>
+            </div>
+          </div>
+
+          <!-- Visual Progression Chart -->
+          <div class="chart-box">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">YOUR 8-WEEK PROGRESSION MATRIX</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light); margin: 0;">Strength overload index (green) vs body weight decline (dashed white)</p>
+              </div>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; align-items: center; flex-wrap: wrap;">
+                <span><span style="display:inline-block; width: 14px; height: 3px; background-color: var(--color-primary); vertical-align: middle; margin-right: 4px;"></span> Strength Index</span>
+                <span><span style="display:inline-block; width: 14px; height: 2px; border-top: 2px dashed #fff; vertical-align: middle; margin-right: 4px;"></span> Body Weight (kg)</span>
+              </div>
+            </div>
+            <div id="customer-progression-chart" class="svg-chart-wrap">
+              <!-- Injected by js/dashboard.js -->
+            </div>
+          </div>
+
+          <!-- Personal Records Row -->
+          <div class="dash-pr-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px;">
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px; border-left: 3px solid var(--color-primary);">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Deadlift PR</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">140.0 <span style="font-size: 1rem; color: var(--color-primary);">kg</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-success);"><i class="fa-solid fa-arrow-trend-up"></i> +10kg PR logged this week</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Back Squat PR</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">125.0 <span style="font-size: 1rem; color: var(--color-text-light);">kg</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-text-light);">Verified by Rory Webster</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Bench Press PR</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">105.0 <span style="font-size: 1rem; color: var(--color-text-light);">kg</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-success);"><i class="fa-solid fa-arrow-trend-up"></i> +5kg PR this month</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Overhead Press</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">72.5 <span style="font-size: 1rem; color: var(--color-text-light);">kg</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-text-light);">Clean strict form</div>
+            </div>
+          </div>
+
+          <!-- Weekly Training Split & Workout Log Form -->
+          <div class="dash-two-col">
+            <!-- Weekly Training Routine Schedule -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">WEEKLY PERIODIZATION SPLIT</h3>
+                <span class="badge badge-lime">Phase 2 Active</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase;">Monday</strong>
+                    <div style="color: #fff; font-weight: 600;">Upper Body Heavy Push (Chest/Delts)</div>
+                  </div>
+                  <span class="badge badge-dark">Completed</span>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); border-left: 3px solid var(--color-primary); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase;">Tuesday (Today)</strong>
+                    <div style="color: #fff; font-weight: 600;">Heavy Pull &amp; Deadlift Progression (140kg)</div>
+                  </div>
+                  <span class="badge badge-lime">Today</span>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase;">Wednesday</strong>
+                    <div style="color: #fff; font-weight: 600;">Athletic Mobility, Handstand Drills &amp; Sauna</div>
+                  </div>
+                  <span style="color: var(--color-text-light); font-size: 0.8rem;">Scheduled</span>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase;">Thursday</strong>
+                    <div style="color: #fff; font-weight: 600;">Lower Body Strength (Squats &amp; Split Squats)</div>
+                  </div>
+                  <span style="color: var(--color-text-light); font-size: 0.8rem;">Scheduled</span>
+                </div>
+                <div style="padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <strong style="color: var(--color-primary); font-size: 0.85rem; text-transform: uppercase;">Friday</strong>
+                    <div style="color: #fff; font-weight: 600;">MetCon Conditioning &amp; Prowler Sled Sprints</div>
+                  </div>
+                  <span style="color: var(--color-text-light); font-size: 0.8rem;">Scheduled</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Exercise Log Form -->
+            <div class="dash-table-card">
+              <div class="dash-card-header">
+                <h3 class="dash-card-title">LOG TODAY'S EXERCISE SET</h3>
+                <span class="badge badge-dark"><i class="fa-solid fa-pen"></i> Daily Log</span>
+              </div>
+              <form id="workout-log-form" novalidate>
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label class="form-label" style="font-size: 0.85rem;">Exercise Name</label>
+                  <input type="text" id="log-exercise-name" class="form-control" placeholder="e.g. Barbell Incline Press" required>
+                </div>
+                <div class="workout-form-inputs-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+                  <div>
+                    <label class="form-label" style="font-size: 0.85rem;">Sets</label>
+                    <input type="number" id="log-exercise-sets" class="form-control" value="4" min="1">
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size: 0.85rem;">Reps</label>
+                    <input type="number" id="log-exercise-reps" class="form-control" value="10" min="1">
+                  </div>
+                  <div>
+                    <label class="form-label" style="font-size: 0.85rem;">Weight (kg)</label>
+                    <input type="number" id="log-exercise-weight" class="form-control" value="85" step="0.5">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm" style="width: 100%; cursor: pointer;">
+                  <i class="fa-solid fa-check"></i> Save Exercise to Workout Log
+                </button>
+              </form>
+
+              <!-- Recently logged preview -->
+              <div style="margin-top: 20px;">
+                <div style="font-size: 0.85rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700; margin-bottom: 8px;">Recent Entries</div>
+                <div id="workout-logged-list" style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; padding: 8px 10px; background: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                    <span style="color: #fff;"><strong>Deadlift:</strong> 5 sets × 5 reps</span>
+                    <span class="text-lime" style="font-weight: 700;">140.0 kg</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; padding: 8px 10px; background: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
+                    <span style="color: #fff;"><strong>Weighted Pull-ups:</strong> 4 sets × 8 reps</span>
+                    <span class="text-lime" style="font-weight: 700;">+20.0 kg</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 3. SESSIONS SECTION ================= -->
+        <section id="sessions-section" class="dash-tab-content">
+          <div class="dash-section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="dash-section-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 4px;">SCHEDULED SESSIONS &amp; COACH BOOKING</h2>
+              <p class="dash-section-subtitle" style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">Book dedicated 1-on-1 performance coaching, specialist clinic slots, and recovery rooms</p>
+            </div>
+            <button type="button" id="btn-trigger-book-inline" class="btn btn-primary btn-sm" style="cursor: pointer;">
+              <i class="fa-solid fa-plus"></i> Book New Session
+            </button>
+          </div>
+
+          <!-- Upcoming Sessions Card -->
+          <div class="dash-table-card">
             <div class="dash-card-header">
               <h3 class="dash-card-title">UPCOMING SCHEDULED SESSIONS</h3>
-              <a href="404.html" class="btn btn-outline btn-sm" style="text-decoration: none;">
-                View Calendar
-              </a>
+              <span class="badge badge-lime">3 Confirmed</span>
             </div>
 
             <div id="sessions-list-container" style="display: flex; flex-direction: column; gap: 14px;">
               <!-- Session 1 -->
-              <div class="session-item-card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <img src="images/trainer-1.webp" alt="Rory Webster" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
-                  <div>
-                    <h5 style="font-size: 1.2rem; color: #fff; margin-bottom: 2px;">Strength &amp; Conditioning (1-on-1)</h5>
-                    <div style="font-size: 0.85rem; color: var(--color-primary);">Tomorrow • 08:00 AM - 09:00 AM</div>
+              <div class="session-item-card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); border-left: 3px solid var(--color-primary);">
+                <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                  <img src="images/trainer-1.webp" alt="Rory Webster" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                  <div style="min-width: 0;">
+                    <h5 style="font-size: 1.15rem; color: #fff; margin-bottom: 2px;">Strength &amp; Conditioning (1-on-1)</h5>
+                    <div style="font-size: 0.85rem; color: var(--color-primary);">Tomorrow • 08:00 AM - 09:00 AM • Coach Rory Webster</div>
                   </div>
                 </div>
-                <div style="display: flex; gap: 8px;">
-                  <a href="404.html" class="btn btn-outline btn-sm" title="Confirm on Calendar"><i class="fa-regular fa-calendar-check"></i></a>
+                <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                  <button type="button" class="btn btn-outline btn-sm btn-reschedule-session" title="Reschedule Session">
+                    <i class="fa-solid fa-calendar"></i> Reschedule
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm btn-cancel-session" style="color: var(--color-danger); border-color: rgba(255,77,79,0.3);" title="Cancel Session">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
                 </div>
               </div>
 
               <!-- Session 2 -->
               <div class="session-item-card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <img src="images/trainer-3.webp" alt="Adam Walker" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
-                  <div>
-                    <h5 style="font-size: 1.2rem; color: #fff; margin-bottom: 2px;">Calisthenics &amp; Handstand Clinic</h5>
-                    <div style="font-size: 0.85rem; color: var(--color-text-light);">Thursday • 06:00 PM - 07:15 PM</div>
+                <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                  <img src="images/trainer-3.webp" alt="Adam Walker" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                  <div style="min-width: 0;">
+                    <h5 style="font-size: 1.15rem; color: #fff; margin-bottom: 2px;">Calisthenics &amp; Handstand Clinic</h5>
+                    <div style="font-size: 0.85rem; color: var(--color-text-light);">Thursday • 06:00 PM - 07:15 PM • Coach Adam Walker</div>
                   </div>
                 </div>
-                <div style="display: flex; gap: 8px;">
-                  <a href="404.html" class="btn btn-outline btn-sm" title="Confirm on Calendar"><i class="fa-regular fa-calendar-check"></i></a>
+                <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                  <button type="button" class="btn btn-outline btn-sm btn-reschedule-session" title="Reschedule Session">
+                    <i class="fa-solid fa-calendar"></i> Reschedule
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm btn-cancel-session" style="color: var(--color-danger); border-color: rgba(255,77,79,0.3);" title="Cancel Session">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
                 </div>
               </div>
 
               <!-- Session 3 -->
               <div class="session-item-card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border);">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <img src="images/trainer-4.webp" alt="Elena Rostova" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
-                  <div>
-                    <h5 style="font-size: 1.2rem; color: #fff; margin-bottom: 2px;">Deep Mobility &amp; Sauna Recovery</h5>
-                    <div style="font-size: 0.85rem; color: var(--color-text-light);">Saturday • 10:30 AM - 11:30 AM</div>
+                <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+                  <img src="images/trainer-4.webp" alt="Elena Rostova" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+                  <div style="min-width: 0;">
+                    <h5 style="font-size: 1.15rem; color: #fff; margin-bottom: 2px;">Deep Mobility &amp; Sauna Recovery</h5>
+                    <div style="font-size: 0.85rem; color: var(--color-text-light);">Saturday • 10:30 AM - 11:30 AM • Coach Elena Rostova</div>
                   </div>
                 </div>
-                <div style="display: flex; gap: 8px;">
-                  <a href="404.html" class="btn btn-outline btn-sm" title="Confirm on Calendar"><i class="fa-regular fa-calendar-check"></i></a>
+                <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                  <button type="button" class="btn btn-outline btn-sm btn-reschedule-session" title="Reschedule Session">
+                    <i class="fa-solid fa-calendar"></i> Reschedule
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm btn-cancel-session" style="color: var(--color-danger); border-color: rgba(255,77,79,0.3);" title="Cancel Session">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Daily Meal & Nutrition Plan Checklist -->
-          <div id="nutrition-section" class="dash-table-card">
+          <!-- Completed Past Sessions History -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <h3 class="dash-card-title">RECENT COMPLETED SESSIONS &amp; FEEDBACK</h3>
+              <span class="badge badge-dark">Past 30 Days</span>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>Date &amp; Time</th>
+                    <th>Session Focus</th>
+                    <th>Coach</th>
+                    <th>Status</th>
+                    <th>Coach Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monday • 08:00 AM</td>
+                    <td><strong>Olympic Lifting &amp; Cleans</strong></td>
+                    <td>Madelyn Donin</td>
+                    <td><span class="status-badge status-active">Completed</span></td>
+                    <td style="color: var(--color-text-light);">Excellent bar turnover, hips extended fully.</td>
+                  </tr>
+                  <tr>
+                    <td>Last Friday • 05:30 PM</td>
+                    <td><strong>High-Intensity Conditioning</strong></td>
+                    <td>Rory Webster</td>
+                    <td><span class="status-badge status-active">Completed</span></td>
+                    <td style="color: var(--color-text-light);">Hit all intervals under target threshold.</td>
+                  </tr>
+                  <tr>
+                    <td>Last Wednesday • 10:00 AM</td>
+                    <td><strong>Hamstring &amp; Hip Rehab</strong></td>
+                    <td>Elena Rostova</td>
+                    <td><span class="status-badge status-active">Completed</span></td>
+                    <td style="color: var(--color-text-light);">Hip asymmetry resolved; cleared for full deadlifts.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 4. NUTRITION SECTION ================= -->
+        <section id="nutrition-section" class="dash-tab-content">
+          <div class="dash-section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="dash-section-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 4px;">TODAY'S MACRO MATRIX &amp; NUTRITION PLAN</h2>
+              <p class="dash-section-subtitle" style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">Fueling protocol engineered for lean muscle synthesis, recovery, and metabolic endurance</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div id="calories-consumed" class="badge badge-lime" style="font-size: 0.95rem;">
+                0 kcal
+              </div>
+            </div>
+          </div>
+
+          <!-- Macro Targets Cards -->
+          <div class="dash-macro-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px;">
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px; border-left: 3px solid var(--color-primary);">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Daily Calorie Budget</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">2,220 <span style="font-size: 1rem; color: var(--color-primary);">kcal</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-text-light);">Maintenance + 10% Lean Bulk</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Target Protein</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">185.0 <span style="font-size: 1rem; color: var(--color-text-light);">g</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-primary);">2.5g per kg body weight</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Target Carbs</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">220.0 <span style="font-size: 1rem; color: var(--color-text-light);">g</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-text-light);">Glycogen replenishing fuel</div>
+            </div>
+            <div style="background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 16px;">
+              <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--color-text-light); font-weight: 700;">Healthy Fats</div>
+              <div style="font-size: 2rem; font-family: var(--font-heading); color: #fff; font-weight: 900;">65.0 <span style="font-size: 1rem; color: var(--color-text-light);">g</span></div>
+              <div style="font-size: 0.75rem; color: var(--color-text-light);">Joint and hormone balance</div>
+            </div>
+          </div>
+
+          <!-- Hydration Tracker Banner -->
+          <div class="dash-table-card" style="margin-bottom: 24px;">
             <div class="dash-card-header">
               <div>
-                <h3 class="dash-card-title">TODAY'S MACRO MATRIX</h3>
-                <p style="font-size: 0.85rem; color: var(--color-text-light);">Target: 2,220 kcal • 185g Protein</p>
+                <h3 class="dash-card-title">DAILY HYDRATION TRACKER</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light); margin: 0;">Goal: 3,500 ml electrolytes &amp; spring water</p>
               </div>
-              <div id="calories-consumed" class="badge badge-lime" style="font-size: 0.9rem;">
-                0 kcal
+              <span class="badge badge-lime" id="hydration-badge">2,500 / 3,500 ml</span>
+            </div>
+            <div style="width: 100%; height: 8px; background-color: #222; border-radius: 4px; overflow: hidden; margin-bottom: 14px;">
+              <div id="hydration-bar" style="width: 71%; height: 100%; background-color: var(--color-primary); transition: width 0.3s ease;"></div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-outline btn-sm btn-add-water" data-amount="250" style="cursor: pointer;">
+                <i class="fa-solid fa-glass-water"></i> +250 ml Glass
+              </button>
+              <button type="button" class="btn btn-outline btn-sm btn-add-water" data-amount="500" style="cursor: pointer;">
+                <i class="fa-solid fa-bottle-water"></i> +500 ml Shaker
+              </button>
+            </div>
+          </div>
+
+          <!-- Daily Meal & Nutrition Plan Checklist -->
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">TODAY'S MEAL CHECKLIST</h3>
+                <p style="font-size: 0.85rem; color: var(--color-text-light); margin: 0;">Check off completed meals to tally your daily calories consumed</p>
               </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 12px;">
               <div class="meal-item" style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); transition: opacity 0.2s;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                  <input type="checkbox" class="meal-checkbox" data-cals="550" style="accent-color: var(--color-primary); width: 18px; height: 18px;">
+                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0;">
+                  <input type="checkbox" class="meal-checkbox" data-cals="550" style="accent-color: var(--color-primary); width: 18px; height: 18px; flex-shrink: 0;">
                   <div>
                     <strong style="color: #fff;">Breakfast: Oats &amp; Whey Shake</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-light);">Oats, 1 Scoop Stackly Isolate, Berries</div>
+                    <div style="font-size: 0.8rem; color: var(--color-text-light);">80g Rolled Oats, 1 Scoop Stackly Isolate, 100g Blueberries (42g Protein)</div>
                   </div>
                 </label>
-                <span class="text-lime" style="font-weight: 700;">550 kcal</span>
+                <span class="text-lime" style="font-weight: 700; flex-shrink: 0;">550 kcal</span>
               </div>
 
               <div class="meal-item" style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); transition: opacity 0.2s;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                  <input type="checkbox" class="meal-checkbox" data-cals="650" style="accent-color: var(--color-primary); width: 18px; height: 18px;">
+                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0;">
+                  <input type="checkbox" class="meal-checkbox" data-cals="650" style="accent-color: var(--color-primary); width: 18px; height: 18px; flex-shrink: 0;">
                   <div>
-                    <strong style="color: #fff;">Lunch: Grilled Chicken &amp; Quinoa</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-light);">200g Chicken, Brown Rice, Steamed Broccoli</div>
+                    <strong style="color: #fff;">Lunch: Grilled Free-Range Chicken &amp; Quinoa</strong>
+                    <div style="font-size: 0.8rem; color: var(--color-text-light);">200g Chicken Breast, Brown Rice, Steamed Broccoli (55g Protein)</div>
                   </div>
                 </label>
-                <span class="text-lime" style="font-weight: 700;">650 kcal</span>
+                <span class="text-lime" style="font-weight: 700; flex-shrink: 0;">650 kcal</span>
               </div>
 
               <div class="meal-item" style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); transition: opacity 0.2s;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                  <input type="checkbox" class="meal-checkbox" data-cals="320" style="accent-color: var(--color-primary); width: 18px; height: 18px;">
+                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0;">
+                  <input type="checkbox" class="meal-checkbox" data-cals="320" style="accent-color: var(--color-primary); width: 18px; height: 18px; flex-shrink: 0;">
                   <div>
-                    <strong style="color: #fff;">Midday Snack: Greek Yogurt Bowl</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-light);">0% Greek Yogurt, Raw Almonds, Honey</div>
+                    <strong style="color: #fff;">Midday Snack: Greek Yogurt Bowl &amp; Almonds</strong>
+                    <div style="font-size: 0.8rem; color: var(--color-text-light);">200g 0% Greek Yogurt, Raw Almonds, Honey (28g Protein)</div>
                   </div>
                 </label>
-                <span class="text-lime" style="font-weight: 700;">320 kcal</span>
+                <span class="text-lime" style="font-weight: 700; flex-shrink: 0;">320 kcal</span>
               </div>
 
               <div class="meal-item" style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); transition: opacity 0.2s;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
-                  <input type="checkbox" class="meal-checkbox" data-cals="700" style="accent-color: var(--color-primary); width: 18px; height: 18px;">
+                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; min-width: 0;">
+                  <input type="checkbox" class="meal-checkbox" data-cals="700" style="accent-color: var(--color-primary); width: 18px; height: 18px; flex-shrink: 0;">
                   <div>
-                    <strong style="color: #fff;">Dinner: Wild Salmon &amp; Sweet Potato</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-light);">220g Atlantic Salmon, Roasted Sweet Potato</div>
+                    <strong style="color: #fff;">Dinner: Wild Salmon &amp; Roasted Sweet Potato</strong>
+                    <div style="font-size: 0.8rem; color: var(--color-text-light);">220g Atlantic Salmon, Sweet Potato, Asparagus (48g Protein)</div>
                   </div>
                 </label>
-                <span class="text-lime" style="font-weight: 700;">700 kcal</span>
+                <span class="text-lime" style="font-weight: 700; flex-shrink: 0;">700 kcal</span>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Coach Chat Panel -->
-        <div id="chat-section" class="dash-table-card">
-          <div class="dash-card-header">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <img src="images/trainer-1.webp" alt="Coach Rory" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary);">
-              <div>
-                <h3 class="dash-card-title" style="margin-bottom: 2px;">COACH DIRECT CHAT</h3>
-                <span style="font-size: 0.8rem; color: var(--color-primary);"><i class="fa-solid fa-circle" style="font-size: 0.6rem;"></i> Rory Webster is online</span>
+        <!-- ================= 5. CHAT SECTION ================= -->
+        <section id="chat-section" class="dash-tab-content">
+          <div class="dash-section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h2 class="dash-section-title" style="font-size: 1.6rem; color: #fff; margin-bottom: 4px;">COACH DIRECT CHAT &amp; PROGRAM SUPPORT</h2>
+              <p class="dash-section-subtitle" style="font-size: 0.88rem; color: var(--color-text-light); margin: 0;">Real-time direct communication with Head Performance Coach Rory Webster</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="badge badge-lime"><i class="fa-solid fa-circle fa-fade"></i> COACH ONLINE</span>
+            </div>
+          </div>
+
+          <div class="dash-table-card">
+            <div class="dash-card-header">
+              <div style="display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;">
+                <img src="images/trainer-1.webp" alt="Coach Rory" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary); flex-shrink: 0;">
+                <div style="min-width: 0; flex: 1; overflow: hidden;">
+                  <h3 class="dash-card-title" style="margin-bottom: 2px; font-size: 1.15rem; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">COACH RORY WEBSTER</h3>
+                  <span style="font-size: 0.75rem; color: var(--color-primary); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa-solid fa-circle" style="font-size: 0.55rem;"></i> Head Strength &amp; Conditioning • Online</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div id="coach-messages-box" style="height: 220px; overflow-y: auto; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 18px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-            <div style="align-self: flex-start; background-color: #1a1c1c; border: 1px solid #2e3434; color: #fff; padding: 10px 16px; border-radius: 4px; max-width: 80%; font-size: 0.95rem;">
-              Hey Alex! Great job hitting 140kg on deadlifts yesterday. Your lumbar stability looked rock solid. Tomorrow morning at 8 AM we'll test upper body pull strength.
+            <div id="coach-messages-box" style="height: 260px; overflow-y: auto; background-color: var(--color-dark-surface); border: 1px solid var(--color-dark-border); padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; box-sizing: border-box; width: 100%;">
+              <div style="align-self: flex-start; background-color: #1a1c1c; border: 1px solid #2e3434; color: #fff; padding: 10px 14px; border-radius: 4px; max-width: 85%; font-size: 0.92rem; line-height: 1.35; word-break: break-word; overflow-wrap: break-word;">
+                <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; display: block; margin-bottom: 2px;">COACH RORY</span>
+                Hey Alex! Great job hitting 140kg on deadlifts yesterday. Your lumbar stability looked rock solid. Tomorrow morning at 8 AM we'll test upper body pull strength.
+              </div>
+              <div style="align-self: flex-end; background-color: var(--color-primary); color: #000; padding: 10px 14px; border-radius: 4px; max-width: 85%; font-size: 0.92rem; font-weight: 500; line-height: 1.35; word-break: break-word; overflow-wrap: break-word;">
+                Thanks Coach! Feeling recovered and ready to go. Should I do any mobility work tonight?
+              </div>
+              <div style="align-self: flex-start; background-color: #1a1c1c; border: 1px solid #2e3434; color: #fff; padding: 10px 14px; border-radius: 4px; max-width: 85%; font-size: 0.92rem; line-height: 1.35; word-break: break-word; overflow-wrap: break-word;">
+                <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 700; display: block; margin-bottom: 2px;">COACH RORY</span>
+                Yes, spend 10 minutes on hip flexors and thoracic foam rolling. See you at 8 sharp!
+              </div>
             </div>
-            <div style="align-self: flex-end; background-color: var(--color-primary); color: #000; padding: 10px 16px; border-radius: 4px; max-width: 80%; font-size: 0.95rem; font-weight: 500;">
-              Thanks Coach! Feeling recovered and ready to go.
-            </div>
-          </div>
 
-          <form id="coach-chat-form" novalidate style="display: flex; gap: 10px;">
-            <input type="text" id="coach-chat-input" class="form-control" placeholder="Ask Coach Rory a question..." style="flex: 1;" autocomplete="off">
-            <a href="404.html" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-              Send <i class="fa-solid fa-paper-plane"></i>
-            </a>
-          </form>
-        </div>
+            <form id="coach-chat-form" novalidate style="display: flex; gap: 8px; width: 100%; box-sizing: border-box;">
+              <input type="text" id="coach-chat-input" class="form-control" placeholder="Ask Coach Rory a question..." style="flex: 1; min-width: 0;" autocomplete="off">
+              <button type="submit" id="btn-send-coach-msg" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; flex-shrink: 0; padding: 8px 14px; cursor: pointer;">
+                Send <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </section>
+
       </div>
     </main>
   </div>
@@ -324,10 +718,10 @@
           <div class="form-group" style="margin-bottom: 16px;">
             <label class="form-label">Session Type / Focus</label>
             <select id="modal-session-type" class="form-control">
-              <option value="Strength & Conditioning (1-on-1)" selected>Strength &amp; Conditioning (1-on-1)</option>
-              <option value="Calisthenics & Handstand Clinic">Calisthenics &amp; Handstand Clinic</option>
-              <option value="Deep Mobility & Sauna Recovery">Deep Mobility &amp; Sauna Recovery</option>
-              <option value="HIIT Shred & Metabolic Conditioning">HIIT Shred &amp; Metabolic Conditioning</option>
+              <option value="Strength &amp; Conditioning (1-on-1)" selected>Strength &amp; Conditioning (1-on-1)</option>
+              <option value="Calisthenics &amp; Handstand Clinic">Calisthenics &amp; Handstand Clinic</option>
+              <option value="Deep Mobility &amp; Sauna Recovery">Deep Mobility &amp; Sauna Recovery</option>
+              <option value="HIIT Shred &amp; Metabolic Conditioning">HIIT Shred &amp; Metabolic Conditioning</option>
               <option value="Olympic Barbell Lifting Mastery">Olympic Barbell Lifting Mastery</option>
             </select>
           </div>
@@ -338,12 +732,12 @@
               <option value="Rory Webster" data-img="images/trainer-1.webp" selected>Rory Webster (Head Performance)</option>
               <option value="Madelyn Donin" data-img="images/trainer-2.webp">Madelyn Donin (Strength Specialist)</option>
               <option value="Adam Walker" data-img="images/trainer-3.webp">Adam Walker (Calisthenics Lead)</option>
-              <option value="Elena Rostova" data-img="images/trainer-4.webp">Elena Rostova (Mobility & Rehab)</option>
+              <option value="Elena Rostova" data-img="images/trainer-4.webp">Elena Rostova (Mobility &amp; Rehab)</option>
             </select>
           </div>
 
           <div class="form-group" style="margin-bottom: 16px;">
-            <label class="form-label">Select Day & Time</label>
+            <label class="form-label">Select Day &amp; Time</label>
             <select id="modal-session-time" class="form-control">
               <option value="Tomorrow • 08:00 AM - 09:00 AM">Tomorrow • 08:00 AM - 09:00 AM</option>
               <option value="Tomorrow • 05:30 PM - 06:30 PM">Tomorrow • 05:30 PM - 06:30 PM</option>
@@ -354,8 +748,8 @@
           </div>
         </div>
         <div class="dash-modal-footer">
-          <a href="404.html" id="cancel-book-modal-btn" class="btn btn-outline btn-sm" style="text-decoration: none;">Cancel</a>
-          <a href="404.html" class="btn btn-primary btn-sm" style="text-decoration: none;">Confirm Booking <i class="fa-solid fa-check"></i></a>
+          <button type="button" id="cancel-book-modal-btn" class="btn btn-outline btn-sm">Cancel</button>
+          <button type="submit" id="submit-book-modal-btn" class="btn btn-primary btn-sm">Confirm Booking <i class="fa-solid fa-check"></i></button>
         </div>
       </form>
     </div>
